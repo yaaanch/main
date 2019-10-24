@@ -189,8 +189,7 @@ public class Autocomplete extends TextField {
         if (tags != null) {
             argumentKeywords.addAll(tags.asListOfStrings());
         }
-        argumentKeywords.addAll(
-                modulePlanner.getModulesInfo().getModuleCodeStrings());
+        argumentKeywords.addAll(modulePlanner.getModuleCodes());
     }
 
     /**

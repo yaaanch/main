@@ -505,6 +505,10 @@ while subsequent words (separated by spaces) will be autocompleted with the set 
 `Autocomplete` is constructed with a `ReadOnlyModulePlanner`.
 It is used to create the keyword sets.
 
+The following sequence diagram shows the creation of Autocomplete:
+
+image::AutocompleteSequenceDiagram.png[]
+
 `Autocomplete` holds the following public operations:
 
 - `Autocomplete#handleAutocomplete` -- Handles the entire autocomplete process based on the current text.
@@ -538,6 +542,10 @@ On action of the menu item, either through clicking or pressing the key `ENTER` 
 the input text is changed to the search result and the caret is positioned at the end of the line.
 
 The autocomplete mechanism behaves similarly for arguments, except the argument set of keywords will be used.
+
+The following activity diagram shows how the autocomplete works:
+
+image::AutocompleteActivityDiagram.png[]
 
 ==== Design Considerations
 

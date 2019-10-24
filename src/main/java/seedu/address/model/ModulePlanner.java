@@ -281,6 +281,13 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
     }
 
     /**
+     * Returns a list of strings of the module codes.
+     */
+    public List<String> getModuleCodes() {
+        return modulesInfo.getModuleCodeStrings();
+    }
+
+    /**
      * Updates prerequisites of the active study plan, if it exists.
      */
     public void updatePrereqs() {
