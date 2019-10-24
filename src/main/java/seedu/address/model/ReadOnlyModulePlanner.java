@@ -30,4 +30,9 @@ public interface ReadOnlyModulePlanner {
      * Returns the current semester of this module planner.
      */
     SemesterName getCurrentSemester();
+
+    /**
+     * Returns the modules info.
+     */
+    ModulesInfo getModulesInfo();
 }
