@@ -180,4 +180,11 @@ public class HelpCommand extends Command {
             throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof HelpCommand // instanceof handles nulls
+                && commandName.equals(((HelpCommand) other).commandName));
+    }
 }

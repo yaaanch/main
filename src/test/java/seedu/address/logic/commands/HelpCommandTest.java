@@ -18,7 +18,6 @@ import seedu.address.model.UserPrefs;
 import seedu.address.testutil.TypicalModulesInfo;
 
 public class HelpCommandTest {
-    // todo implement tests
     private static final String NON_EXISTENT_COMMAND_NAME = "notexistingcommandname";
 
     private Model model = new ModelManager(new ModulePlanner(), new UserPrefs(),
