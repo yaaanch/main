@@ -16,6 +16,7 @@ import seedu.address.model.versiontracking.exception.StudyPlanCommitManagerNotFo
 public class ViewCommitHistoryCommand extends Command {
 
     public static final String COMMAND_WORD = "history";
+    public static final String HELP_MESSAGE = COMMAND_WORD + ": Checking commit history";
     public static final String MESSAGE_SUCCESS = "Here is the commit history of the current study plan:\n";
     public static final String MESSAGE_NO_COMMIT_HISTORY = "Your current study plan has no commit history yet!";
 
