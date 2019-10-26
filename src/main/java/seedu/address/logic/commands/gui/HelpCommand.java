@@ -1,5 +1,7 @@
 package seedu.address.logic.commands.gui;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.cli.AddModuleCommand;
@@ -20,6 +22,7 @@ import seedu.address.logic.commands.datamanagement.ViewAllTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewDefaultTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanEditCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
@@ -103,7 +106,7 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model) {
+    public CommandResult execute(Model model) throws CommandException {
         switch (commandName) {
         case AddModuleCommand.COMMAND_WORD:
             return new CommandResult(AddModuleCommand.MESSAGE_USAGE, false, false);
@@ -171,8 +174,10 @@ public class HelpCommand extends Command {
             return new CommandResult(ViewCommitCommand.MESSAGE_USAGE, false, false);
         case RenameTagCommand.COMMAND_WORD:
             return new CommandResult(RenameTagCommand.MESSAGE_USAGE, false, false);
-        default:
+        case "":
             return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
+        default:
+            throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }
     }
 }
