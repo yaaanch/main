@@ -13,14 +13,14 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.ModulePlanner;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.TypicalModulesInfo;
+import seedu.address.testutil.TypicalStudyPlans;
 
 public class HelpCommandTest {
     private static final String NON_EXISTENT_COMMAND_NAME = "notexistingcommandname";
 
-    private Model model = new ModelManager(new ModulePlanner(), new UserPrefs(),
+    private Model model = new ModelManager(TypicalStudyPlans.getTypicalModulePlanner(), new UserPrefs(),
             TypicalModulesInfo.getTypicalModulesInfo());
 
     @Test
