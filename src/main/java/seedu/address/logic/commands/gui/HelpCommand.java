@@ -3,11 +3,15 @@ package seedu.address.logic.commands.gui;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.cli.AddModuleCommand;
+import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
+import seedu.address.logic.commands.cli.NameUeFromSemesterCommand;
 import seedu.address.logic.commands.cli.RedoCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.UndoCommand;
 import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
+import seedu.address.logic.commands.datamanagement.FindCommand;
+import seedu.address.logic.commands.datamanagement.RemoveAllTagsCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromAllCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromModuleCommand;
 import seedu.address.logic.commands.datamanagement.RenameTagCommand;
@@ -19,11 +23,14 @@ import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanEditCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
+import seedu.address.logic.commands.storage.DefaultStudyPlanCommand;
 import seedu.address.logic.commands.storage.DeleteCommand;
 import seedu.address.logic.commands.storage.DeleteCommitCommand;
+import seedu.address.logic.commands.storage.DeleteSemesterCommand;
 import seedu.address.logic.commands.storage.EditTitleCommand;
 import seedu.address.logic.commands.storage.ListAllStudyPlansCommand;
 import seedu.address.logic.commands.storage.RevertCommitCommand;
+import seedu.address.logic.commands.storage.ViewCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
@@ -37,10 +44,10 @@ public class HelpCommand extends Command {
     public static final String COMMAND_WORD = "help";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": Showing help";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
-            + "Example: " + COMMAND_WORD;
+            + "Example: " + COMMAND_WORD + " or " + COMMAND_WORD + " COMMAND";
     public static final String AUTOCOMPLETE_MESSAGE = "Press TAB to autocomplete a command.";
 
-    public static final String SHOWING_HELP_MESSAGE = "Type help <command> to find out more.\n"
+    public static final String SHOWING_HELP_MESSAGE = "Type " + COMMAND_WORD + " COMMAND to find out more.\n"
             + AUTOCOMPLETE_MESSAGE + "\n\n"
             + "List of commands:\n"
             + "\nSemesters and Modules:\n"
@@ -85,9 +92,87 @@ public class HelpCommand extends Command {
             + "\nUndo/Redo:\n"
             + UndoCommand.HELP_MESSAGE + "\n"
             + RedoCommand.HELP_MESSAGE;
+    private final String commandName;
+
+    public HelpCommand() {
+        this.commandName = "";
+    }
+
+    public HelpCommand(String commandName) {
+        this.commandName = commandName;
+    }
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
+        switch (commandName) {
+        case AddModuleCommand.COMMAND_WORD:
+            return new CommandResult(AddModuleCommand.MESSAGE_USAGE, false, false);
+            case BlockCurrentSemesterCommand.COMMAND_WORD:
+                return new CommandResult(BlockCurrentSemesterCommand.MESSAGE_USAGE, false, false);
+            case DeleteModuleCommand.COMMAND_WORD:
+                return new CommandResult(DeleteModuleCommand.MESSAGE_USAGE, false, false);
+        case NameUeFromSemesterCommand.COMMAND_WORD:
+            return new CommandResult(NameUeFromSemesterCommand.MESSAGE_USAGE, false, false);
+        case SetCurrentSemesterCommand.COMMAND_WORD:
+            return new CommandResult(SetCurrentSemesterCommand.MESSAGE_USAGE, false, false);
+        case FindCommand.COMMAND_WORD:
+            return new CommandResult(FindCommand.MESSAGE_USAGE, false, false);
+        case DescriptionCommand.COMMAND_WORD:
+            return new CommandResult(DescriptionCommand.MESSAGE_USAGE, false, false);
+        case ValidModsCommand.COMMAND_WORD:
+            return new CommandResult(ValidModsCommand.MESSAGE_USAGE, false, false);
+        case CommitStudyPlanEditCommand.COMMAND_WORD:
+            return new CommandResult(CommitStudyPlanEditCommand.MESSAGE_USAGE, false, false);
+        case CreateStudyPlanCommand.COMMAND_WORD:
+            return new CommandResult(CreateStudyPlanCommand.MESSAGE_USAGE, false, false);
+        case DeleteCommand.COMMAND_WORD:
+            return new CommandResult(DeleteCommand.MESSAGE_USAGE, false, false);
+        case TagModuleCommand.COMMAND_WORD:
+            return new CommandResult(TagModuleCommand.MESSAGE_USAGE, false, false);
+        case ViewCommitHistoryCommand.COMMAND_WORD:
+            return new CommandResult(ViewCommitHistoryCommand.MESSAGE_USAGE, false, false);
+        case RemoveTagFromModuleCommand.COMMAND_WORD:
+            return new CommandResult(RemoveTagFromModuleCommand.MESSAGE_USAGE, false, false);
+        case ViewModuleTagsCommand.COMMAND_WORD:
+            return new CommandResult(ViewModuleTagsCommand.MESSAGE_USAGE, false, false);
+        case DeleteTagCommand.COMMAND_WORD:
+            return new CommandResult(DeleteTagCommand.MESSAGE_USAGE, false, false);
+        case RemoveTagFromAllCommand.COMMAND_WORD:
+            return new CommandResult(RemoveTagFromAllCommand.MESSAGE_USAGE, false, false);
+        case EditTitleCommand.COMMAND_WORD:
+            return new CommandResult(EditTitleCommand.MESSAGE_USAGE, false, false);
+        case ActivateStudyPlanCommand.COMMAND_WORD:
+            return new CommandResult(ActivateStudyPlanCommand.MESSAGE_USAGE, false, false);
+        case ListAllStudyPlansCommand.COMMAND_WORD:
+            return new CommandResult(ListAllStudyPlansCommand.MESSAGE_USAGE, false, false);
+        case RevertCommitCommand.COMMAND_WORD:
+            return new CommandResult(RevertCommitCommand.MESSAGE_USAGE, false, false);
+        case RedoCommand.COMMAND_WORD:
+            return new CommandResult(RedoCommand.MESSAGE_USAGE, false, false);
+        case UndoCommand.COMMAND_WORD:
+            return new CommandResult(UndoCommand.MESSAGE_USAGE, false, false);
+        case HelpCommand.COMMAND_WORD:
+            return new CommandResult(HelpCommand.MESSAGE_USAGE, false, false);
+        case ViewDefaultTagsCommand.COMMAND_WORD:
+            return new CommandResult(ViewDefaultTagsCommand.MESSAGE_USAGE, false, false);
+        case ViewTaggedCommand.COMMAND_WORD:
+            return new CommandResult(ViewTaggedCommand.MESSAGE_USAGE, false, false);
+        case ViewAllTagsCommand.COMMAND_WORD:
+            return new CommandResult(ViewAllTagsCommand.MESSAGE_USAGE, false, false);
+        case RemoveAllTagsCommand.COMMAND_WORD:
+            return new CommandResult(RemoveAllTagsCommand.MESSAGE_USAGE, false, false);
+        case DeleteCommitCommand.COMMAND_WORD:
+            return new CommandResult(DeleteCommitCommand.MESSAGE_USAGE, false, false);
+        case DefaultStudyPlanCommand.COMMAND_WORD:
+            return new CommandResult(DefaultStudyPlanCommand.MESSAGE_USAGE, false, false);
+        case DeleteSemesterCommand.COMMAND_WORD:
+            return new CommandResult(DeleteSemesterCommand.MESSAGE_USAGE, false, false);
+        case ViewCommitCommand.COMMAND_WORD:
+            return new CommandResult(ViewCommitCommand.MESSAGE_USAGE, false, false);
+        case RenameTagCommand.COMMAND_WORD:
+            return new CommandResult(RenameTagCommand.MESSAGE_USAGE, false, false);
+        default:
+            return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
+        }
     }
 }
