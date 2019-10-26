@@ -9,12 +9,12 @@ import seedu.address.model.module.UniqueModuleList;
  * Represents a semester of university for CS Undergraduate Students.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Semester {
+public class Semester implements Cloneable {
     // Identity fields
     private SemesterName semesterName; // removed final keyword for the clone() method below
 
     // Data fields
-    private UniqueModuleList modules = new UniqueModuleList(); // removed final keyword for the clone() method below
+    private UniqueModuleList modules = new UniqueModuleList();
     private boolean isBlocked;
     private String reasonForBlocked;
     private boolean isExpanded = false;
@@ -38,6 +38,15 @@ public class Semester {
         for (Module module : modules) {
             this.modules.add(module);
         }
+    }
+
+    @Override
+    protected Semester clone() throws CloneNotSupportedException {
+        Semester clone = (Semester) super.clone();
+        clone.isBlocked = this.isBlocked;
+        clone.reasonForBlocked = this.reasonForBlocked;
+        clone.modules = this.modules.clone();
+        return clone;
     }
 
     public SemesterName getSemesterName() {
@@ -88,6 +97,13 @@ public class Semester {
         return this.modules.contains(module);
     }
 
+    /**
+     * Clears/deletes all modules this semester.
+     */
+    public void clearAllModules() {
+        modules = new UniqueModuleList();
+    }
+
     // NOTE: this is for the GUI to use for Milestone 2
     @Override
     public String toString() {
@@ -95,9 +111,37 @@ public class Semester {
         result.append(semesterName).append(":").append("\n");
         for (Module module : modules) {
             result.append(module.toString()).append("\n");
+            //result.append(module.getModuleCode().value).append("\n");
         }
 
         return result.toString();
+    }
+
+    // Added this method to display a simplified list of semesters for commands like viewplan/viewcommit.
+    /**
+     * Converts this semester to a String suitable for display in a simplified study plan.
+     */
+    public String toStringForSimplifiedStudyPlan() {
+        StringBuilder result = new StringBuilder();
+        for (Module module : modules) {
+            result.append("-").append(module.getModuleCode()).append("\n");
+        }
+        return result.toString();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof Semester) {
+            Semester other = (Semester) obj;
+            return this.modules.equals(other.getModules())
+                    && this.isBlocked == other.isBlocked
+                    && (this.reasonForBlocked == null ? true : this.reasonForBlocked.equals(other.reasonForBlocked))
+                    && this.isExpanded == other.isExpanded
+                    && this.semesterName == other.getSemesterName();
+        }
+        return false;
     }
 
 }

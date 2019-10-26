@@ -130,6 +130,11 @@ public class CreateTagCommandTest {
         }
 
         @Override
+        public void deleteAllModulesInSemester(SemesterName semesterName) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public StudyPlan getActiveStudyPlan() {
             throw new AssertionError("This method should not be called.");
         }
@@ -212,6 +217,31 @@ public class CreateTagCommandTest {
         @Override
         public void updateAllCompletedTags() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoModulePlanner() {
+            return false;
+        }
+
+        @Override
+        public boolean canRedoModulePlanner() {
+            return false;
+        }
+
+        @Override
+        public void undoModulePlanner() {
+            //TODO: implement this
+        }
+
+        @Override
+        public void redoModulePlanner() {
+            //TODO: implement this
+        }
+
+        @Override
+        public void addToHistory() {
+            //TODO: implement this
         }
 
         @Override

@@ -19,6 +19,8 @@ import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.tag.Tag;
 import seedu.address.ui.exceptions.InvalidResultViewTypeException;
 
+//import seedu.address.model.versiontracking.Commit;
+
 /**
  * The Main Window. Provides the basic application layout containing
  * a menu bar and space where other JavaFX elements can be placed.
@@ -190,7 +192,7 @@ public class MainWindow extends UiPart<Stage> {
         case TEXT:
             TextArea textArea = new TextArea();
             ObservableList<String> textContent = (ObservableList<String>) resultContent;
-            for (String text: textContent) {
+            for (String text : textContent) {
                 textArea.setText(text);
             }
             resultDisplayPlaceholder.getChildren().add(textArea);
@@ -206,9 +208,9 @@ public class MainWindow extends UiPart<Stage> {
             //resultDisplay.setResultView(moduleListPanel.getRoot());
             break;
         case STUDY_PLAN:
-            //ObservableList<StudyPlan> studyPlanContent = (ObservableList<StudyPlan>) resultContent;
-            //StudyPlanListPanel = studyPlanListPanel = new StudyPlanListPanel(studyPlanContent);
-            //resultDisplay.setResultView(studyPlanListPanel.getRoot());
+            ObservableList<Semester> studyPlanContent = (ObservableList<Semester>) resultContent;
+            SimpleSemesterListPanel simpleSemesterListPanel = new SimpleSemesterListPanel(studyPlanContent);
+            resultDisplay.setResultView(simpleSemesterListPanel.getRoot());
             break;
         case COMMIT_HISTORY:
             //ObservableList<Commit> commitContent = (ObservableList<Commit>) resultContent;
