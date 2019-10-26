@@ -107,10 +107,10 @@ public class HelpCommand extends Command {
         switch (commandName) {
         case AddModuleCommand.COMMAND_WORD:
             return new CommandResult(AddModuleCommand.MESSAGE_USAGE, false, false);
-            case BlockCurrentSemesterCommand.COMMAND_WORD:
-                return new CommandResult(BlockCurrentSemesterCommand.MESSAGE_USAGE, false, false);
-            case DeleteModuleCommand.COMMAND_WORD:
-                return new CommandResult(DeleteModuleCommand.MESSAGE_USAGE, false, false);
+        case BlockCurrentSemesterCommand.COMMAND_WORD:
+            return new CommandResult(BlockCurrentSemesterCommand.MESSAGE_USAGE, false, false);
+        case DeleteModuleCommand.COMMAND_WORD:
+            return new CommandResult(DeleteModuleCommand.MESSAGE_USAGE, false, false);
         case NameUeFromSemesterCommand.COMMAND_WORD:
             return new CommandResult(NameUeFromSemesterCommand.MESSAGE_USAGE, false, false);
         case SetCurrentSemesterCommand.COMMAND_WORD:
