@@ -4,9 +4,18 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.cli.AddModuleCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
+import seedu.address.logic.commands.cli.RedoCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.UndoCommand;
+import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
+import seedu.address.logic.commands.datamanagement.RemoveTagFromAllCommand;
+import seedu.address.logic.commands.datamanagement.RemoveTagFromModuleCommand;
+import seedu.address.logic.commands.datamanagement.RenameTagCommand;
+import seedu.address.logic.commands.datamanagement.TagModuleCommand;
 import seedu.address.logic.commands.datamanagement.ViewAllTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewDefaultTagsCommand;
+import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
+import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanEditCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
@@ -20,8 +29,6 @@ import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
 import seedu.address.model.Model;
 
-import javax.swing.text.View;
-
 /**
  * Format full help instructions for every command for display.
  */
@@ -33,8 +40,16 @@ public class HelpCommand extends Command {
             + "Example: " + COMMAND_WORD;
     public static final String AUTOCOMPLETE_MESSAGE = "Press TAB to autocomplete a command.";
 
-    public static final String SHOWING_HELP_MESSAGE = "Type help <command> to find out more. List of commands:\n\n"
-            + AUTOCOMPLETE_MESSAGE + "\n"
+    public static final String SHOWING_HELP_MESSAGE = "Type help <command> to find out more.\n"
+            + AUTOCOMPLETE_MESSAGE + "\n\n"
+            + "List of commands:\n"
+            + "\nSemesters and Modules:\n"
+            + AddModuleCommand.HELP_MESSAGE + "\n"
+            + DeleteModuleCommand.HELP_MESSAGE + "\n"
+            + SetCurrentSemesterCommand.HELP_MESSAGE + "\n"
+            + "???: nameue - Naming a UE from a semester\n"
+            + "NOT YET: move - Moving a module from one semester to another\n"
+            + "???: block - Blocking off the given semester\n"
             + "\nStudy plans and committing:\n"
             + CreateStudyPlanCommand.HELP_MESSAGE + "\n"
             + DeleteCommand.HELP_MESSAGE + "\n"
@@ -49,41 +64,30 @@ public class HelpCommand extends Command {
             + "NOT YET: viewplan - Viewing another study plan\n"
             + "NOT YET: remove - Deleting a semester from a study plan\n"
             + "NOT YET: default - Setting default study plan\n"
-            + "\nGUI:\n"
-            + HelpCommand.HELP_MESSAGE + "\n"
-            + "NOT YET: expand - Expanding a semester\n"
-            + "NOT YET: collapse - Collapsing a semester\n"
-            + "\nSemesters and modules\n"
-            + AddModuleCommand.HELP_MESSAGE + "\n"
-            + DeleteModuleCommand.HELP_MESSAGE + "\n"
-            + SetCurrentSemesterCommand.HELP_MESSAGE + "\n"
-            + "???: nameue - Naming a UE from a semester\n"
-            + "NOT YET: move - Moving a module from one semester to another\n"
-            + "???: block - Blocking off the given semester\n"
-            + "\nRegarding undo/redo\n"
-            + "NOT YET: undo - Undo-ing the previous command\n"
-            + "NOT YET: redo - Redo-ing the previous undone command\n"
-            + "\nRegarding data classification and management:\n"
+            + "\nTags:\n"
             + ViewAllTagsCommand.HELP_MESSAGE + "\n"
             + ViewDefaultTagsCommand.HELP_MESSAGE + "\n"
-            + "viewdefaulttags - Viewing default tags\n"
-            + "viewalltags - Viewing all tags\n"
-            + "renametag - Renaming an existing tag\n"
-            + "addtag - Tagging modules\n"
-            + "removetag - Removing a tag from a module\n"
-            + "removeall - Removing a tag from all modules\n"
-            + "deletetag - Deleting tags\n"
-            + "viewtagged - Viewing modules with specific tags\n"
-            + "viewtags - Viewing tags for a specific module\n"
-            + "findmod - Finding modules using the module code\n"
-            + "getmodcode - Finding module code using keywords\n"
-            + "mcs - Viewing total completed MCs\n"
-            + "\nRegarding module information:\n"
-            + DescriptionCommand.HELP_MESSAGE
-            + ValidModsCommand.HELP_MESSAGE;
+            + TagModuleCommand.HELP_MESSAGE + "\n"
+            + RemoveTagFromModuleCommand.HELP_MESSAGE + "\n"
+            + RemoveTagFromAllCommand.HELP_MESSAGE + "\n"
+            + RenameTagCommand.HELP_MESSAGE + "\n"
+            + DeleteTagCommand.HELP_MESSAGE + "\n"
+            + ViewModuleTagsCommand.HELP_MESSAGE + "\n"
+            + ViewTaggedCommand.HELP_MESSAGE + "\n"
+            + "\nModule information:\n"
+            + DescriptionCommand.HELP_MESSAGE + "\n"
+            + ValidModsCommand.HELP_MESSAGE + "\n"
+            + "NOT YET: findmod - Finding modules using the module code\n"
+            + "NOT YET: getmodcode - Finding module code using keywords\n"
+            + "\nGUI:\n"
+            + "NOT YET: expand - Expanding a semester\n"
+            + "NOT YET: collapse - Collapsing a semester\n"
+            + "\nUndo/Redo:\n"
+            + UndoCommand.HELP_MESSAGE + "\n"
+            + RedoCommand.HELP_MESSAGE;
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(SHOWING_HELP_MESSAGE, true, false);
+        return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
     }
 }
