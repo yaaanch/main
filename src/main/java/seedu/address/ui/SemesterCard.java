@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.Comparator;
 import java.util.logging.Logger;
 
@@ -11,8 +13,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.semester.Semester;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * An UI component that displays information of a {@code Semester}.
