@@ -16,16 +16,7 @@ import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
 import seedu.address.logic.commands.cli.NameUeFromSemesterCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
-import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
-import seedu.address.logic.commands.datamanagement.FindModuleCommand;
-import seedu.address.logic.commands.datamanagement.RemoveTagFromAllCommand;
-import seedu.address.logic.commands.datamanagement.RemoveTagFromModuleCommand;
-import seedu.address.logic.commands.datamanagement.RenameTagCommand;
-import seedu.address.logic.commands.datamanagement.TagModuleCommand;
-import seedu.address.logic.commands.datamanagement.ViewAllTagsCommand;
-import seedu.address.logic.commands.datamanagement.ViewDefaultTagsCommand;
-import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
-import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
+import seedu.address.logic.commands.datamanagement.*;
 import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.ClearCommand;
@@ -184,6 +175,9 @@ public class Autocomplete extends TextField {
         commandKeywords.add(ActivateStudyPlanCommand.COMMAND_WORD);
         commandKeywords.add(ListAllStudyPlansCommand.COMMAND_WORD);
         commandKeywords.add(HelpCommand.COMMAND_WORD);
+        commandKeywords.add(TagStudyPlanCommand.COMMAND_WORD);
+        commandKeywords.add(RemoveTagFromStudyPlanCommand.COMMAND_WORD);
+        commandKeywords.add(SortStudyPlansByPriorityTagCommand.COMMAND_WORD);
     }
 
     /**

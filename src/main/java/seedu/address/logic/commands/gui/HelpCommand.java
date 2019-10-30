@@ -179,6 +179,12 @@ public class HelpCommand extends Command {
             return new CommandResult(ViewCommitCommand.MESSAGE_USAGE, false, false);
         case RenameTagCommand.COMMAND_WORD:
             return new CommandResult(RenameTagCommand.MESSAGE_USAGE, false, false);
+        case TagStudyPlanCommand.COMMAND_WORD:
+            return new CommandResult(TagStudyPlanCommand.MESSAGE_USAGE, false, false);
+        case RemoveTagFromStudyPlanCommand.COMMAND_WORD:
+            return new CommandResult(RemoveTagFromStudyPlanCommand.MESSAGE_USAGE, false, false);
+        case SortStudyPlansByPriorityTagCommand.COMMAND_WORD:
+            return new CommandResult(SortStudyPlansByPriorityTagCommand.MESSAGE_USAGE, false, false);
         case "":
             return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
         default:
