@@ -9,6 +9,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.module.Module;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * An UI component that displays information of a {@code Person}.
  */
@@ -39,6 +41,7 @@ public class ModuleCard extends UiPart<Region> {
 
     public ModuleCard(Module module) {
         super(FXML);
+        requireNonNull(module);
         this.module = module;
         name.setText(module.getModuleCode().value + " " + module.getName().fullName);
         mcCount.setText(Integer.toString(module.getMcCount()));

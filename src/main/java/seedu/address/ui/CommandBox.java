@@ -11,6 +11,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ReadOnlyModulePlanner;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * The UI component that is responsible for receiving user command inputs.
  */
@@ -28,6 +30,8 @@ public class CommandBox extends UiPart<Region> {
 
     public CommandBox(CommandExecutor commandExecutor, ReadOnlyModulePlanner modulePlanner) {
         super(FXML);
+        requireNonNull(commandExecutor);
+        requireNonNull(modulePlanner);
         this.commandExecutor = commandExecutor;
         autocomplete = new Autocomplete(modulePlanner);
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.

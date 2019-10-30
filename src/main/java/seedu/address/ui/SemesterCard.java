@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.semester.Semester;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * An UI component that displays information of a {@code Semester}.
  */
@@ -45,6 +47,7 @@ public class SemesterCard extends UiPart<Region> {
 
     public SemesterCard(Semester semester) {
         super(FXML);
+        requireNonNull(semester);
         this.semester = semester;
         name.setText(semester.getSemesterName().name());
         totalMcCount.setText("(" + semester.getMcCount() + ")");

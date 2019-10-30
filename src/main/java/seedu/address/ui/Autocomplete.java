@@ -109,9 +109,11 @@ public class Autocomplete extends TextField {
             keywordMenu.hide();
         } else {
             String input = getText();
+            input = input.trim();
             String[] inputArray = input.split(" ");
             if (inputArray.length == 1) {
-                completeInput(inputArray[0], commandKeywords, "");
+                completeInput(inputArray[0], commandKeywords, getText().substring(0, getText().lastIndexOf(" "))
+                        + " ");
             } else if (inputArray[0].equals(HelpCommand.COMMAND_WORD)) {
                 // The Help command uses commands as arguments.
                 completeInput(inputArray[inputArray.length - 1], commandKeywords, HelpCommand.COMMAND_WORD + " ");
