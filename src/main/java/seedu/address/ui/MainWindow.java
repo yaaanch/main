@@ -14,6 +14,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.Module;
 import seedu.address.model.semester.Semester;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.tag.Tag;
@@ -40,6 +41,7 @@ public class MainWindow extends UiPart<Stage> {
     private SemesterListPanel semesterListPanel;
     private ResultDisplay resultDisplay;
     private CommandBox commandBox;
+    private StudyPlanTagPanel studyPlanTagPanel;
 
     @FXML
     private Label title;
@@ -58,6 +60,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private StackPane studyPlanTagsPlaceholder;
 
     public MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
@@ -95,6 +100,9 @@ public class MainWindow extends UiPart<Stage> {
             semesterListPanelPlaceholder.getChildren().add(semesterListPanel.getRoot());
             title.setText(sp.getTitle().toString());
             mcCount.setText(sp.getMcCountString());
+            studyPlanTagPanel = new StudyPlanTagPanel(sp.getStudyPlanTags()
+                    .asUnmodifiableObservableList());
+            studyPlanTagsPlaceholder.getChildren().add(studyPlanTagPanel.getRoot());
         }
 
         resultDisplay = new ResultDisplay();
@@ -141,11 +149,11 @@ public class MainWindow extends UiPart<Stage> {
      * @see seedu.address.logic.Logic#execute(String)
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
+        resultDisplay.removeResultView();
         try {
             CommandResult commandResult = logic.execute(commandText);
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
-            resultDisplay.removeResultView();
             semesterListPanel.refresh();
 
             StudyPlan sp = logic.getActiveStudyPlan();
@@ -162,6 +170,9 @@ public class MainWindow extends UiPart<Stage> {
                     semesterListPanel = new SemesterListPanel(semesters);
                     semesterListPanelPlaceholder.getChildren().remove(0);
                     semesterListPanelPlaceholder.getChildren().add(semesterListPanel.getRoot());
+                    studyPlanTagPanel = new StudyPlanTagPanel(sp.getStudyPlanTags().asUnmodifiableObservableList());
+                    studyPlanTagsPlaceholder.getChildren().remove(0);
+                    studyPlanTagsPlaceholder.getChildren().add(studyPlanTagPanel.getRoot());
                     title.setText(sp.getTitle().toString());
                     commandBox.handleChangeOfActiveStudyPlan();
                 }
@@ -203,11 +214,11 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setResultView(tagListPanel.getRoot());
             break;
         case MODULE:
-            //ObservableList<Module> moduleContent = (ObservableList<Module>) resultContent;
-            //ModuleListPanel moduleListPanel = new ModuleListPanel(moduleContent);
-            //resultDisplay.setResultView(moduleListPanel.getRoot());
+            ObservableList<Module> moduleContent = (ObservableList<Module>) resultContent;
+            ModuleListPanel moduleListPanel = new ModuleListPanel(moduleContent);
+            resultDisplay.setResultView(moduleListPanel.getRoot());
             break;
-        case STUDY_PLAN:
+        case SEMESTER:
             ObservableList<Semester> studyPlanContent = (ObservableList<Semester>) resultContent;
             SimpleSemesterListPanel simpleSemesterListPanel = new SimpleSemesterListPanel(studyPlanContent);
             resultDisplay.setResultView(simpleSemesterListPanel.getRoot());

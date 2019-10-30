@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import seedu.address.model.Color;
 import seedu.address.model.ModuleInfo;
@@ -21,9 +22,12 @@ import seedu.address.model.semester.UniqueSemesterList;
 import seedu.address.model.semester.exceptions.SemesterAlreadyBlockedException;
 import seedu.address.model.semester.exceptions.SemesterNotFoundException;
 import seedu.address.model.tag.DefaultTag;
+import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UserTag;
+import seedu.address.model.tag.exceptions.InvalidTagException;
+import seedu.address.model.tag.exceptions.TagNotFoundException;
 
 /**
  * Represents a study plan in the module planner.
@@ -42,11 +46,13 @@ public class StudyPlan implements Cloneable {
     // note: this Mega-List is only constructed when a study plan gets activated.
     private HashMap<String, Module> modules;
 
-    // the unique list of tags of this study plan.
+    // the unique list of tags for the modules of this study plan.
     // All tags in an *active* study plan refer to a tag here.
     // note: this unique list of tags is only constructed when a study plan gets activated.
-    private UniqueTagList tags;
+    private UniqueTagList moduleTags;
 
+    // the unique list of tags for the current study plan.
+    private UniqueTagList studyPlanTags;
 
     // to create a study plan without a Title
     public StudyPlan(ModulesInfo modulesInfo, SemesterName currentSemester) {
@@ -61,9 +67,12 @@ public class StudyPlan implements Cloneable {
         setDefaultSemesters();
 
         // switch the current active plan to the newly created one. Reason: user can directly add modules to it.
+        isActivated = true;
 
-        tags = new UniqueTagList();
-        tags.initDefaultTags();
+        moduleTags = new UniqueTagList();
+        moduleTags.initDefaultTags();
+
+        studyPlanTags = new UniqueTagList();
 
         setMegaModuleHashMap(modulesInfo);
 
@@ -75,18 +84,24 @@ public class StudyPlan implements Cloneable {
      * This constructor is used for {@code JsonAdaptedStudyPlan}.
      */
     public StudyPlan(Title modelTitle, int modelIndex, List<Semester> modelSemesters,
-                     HashMap<String, Module> modelModules, List<Tag> modelTags, SemesterName currentSemester) {
+                     HashMap<String, Module> modelModules, List<Tag> modelTags,
+                     SemesterName currentSemester, List<Tag> modelStudyPlanTags) {
         this.title = modelTitle;
         this.index = modelIndex;
         this.semesters = new UniqueSemesterList();
         this.semesters.setSemesters(modelSemesters);
         this.modules = modelModules;
-        this.tags = new UniqueTagList();
-        tags.initDefaultTags();
+        this.moduleTags = new UniqueTagList();
+        moduleTags.initDefaultTags();
         for (Tag tag : modelTags) {
-            tags.addTag(tag);
+            moduleTags.addTag(tag);
         }
+        this.studyPlanTags = new UniqueTagList();
         this.currentSemester = currentSemester;
+        this.studyPlanTags = new UniqueTagList();
+        for (Tag tag : modelStudyPlanTags) {
+            studyPlanTags.addTag(tag);
+        }
     }
 
     public void setTitle(Title title) {
@@ -111,8 +126,22 @@ public class StudyPlan implements Cloneable {
     }
 
     // "Mega-list" of tags
-    public UniqueTagList getTags() {
-        return tags;
+    public UniqueTagList getModuleTags() {
+        return moduleTags;
+    }
+
+    /**
+     * Returns all the tags that the module with the given module code is attached to.
+     *
+     * @return The UniqueTagList containing all the tags.
+     */
+    public UniqueTagList getModuleTags(String moduleCode) {
+        Module targetModule = modules.get(moduleCode);
+        return targetModule.getTags();
+    }
+
+    public UniqueTagList getStudyPlanTags() {
+        return studyPlanTags;
     }
 
     public SemesterName getCurrentSemester() {
@@ -134,8 +163,13 @@ public class StudyPlan implements Cloneable {
     }
 
     // for testing
-    public void setTags(UniqueTagList tags) {
-        this.tags = tags;
+    public void setModuleTags(UniqueTagList moduleTags) {
+        this.moduleTags = moduleTags;
+    }
+
+    // for testing
+    public void setStudyPlanTags(UniqueTagList studyPlanTags) {
+        this.studyPlanTags = studyPlanTags;
     }
 
     public boolean isActivated() {
@@ -212,7 +246,7 @@ public class StudyPlan implements Cloneable {
     // made public so as to be accessible from activate method from ModulePlanner
     public UniqueTagList assignDefaultTags(ModuleInfo moduleInfo) {
         UniqueTagList moduleTagList = new UniqueTagList();
-        UniqueTagList studyPlanTagList = tags;
+        UniqueTagList studyPlanTagList = moduleTags;
 
         // assign focus primary tags
         assignFocusPrimaryTags(moduleInfo, moduleTagList, studyPlanTagList);
@@ -338,7 +372,7 @@ public class StudyPlan implements Cloneable {
         UniqueModuleList uniqueModuleList = semester.getModules();
         for (Module module : uniqueModuleList) {
             UniqueTagList uniqueTagList = module.getTags();
-            DefaultTag completedTag = tags.getDefaultTag("Completed");
+            DefaultTag completedTag = moduleTags.getDefaultTag("Completed");
             if (uniqueTagList.contains(completedTag)) {
                 continue;
             }
@@ -355,7 +389,7 @@ public class StudyPlan implements Cloneable {
         UniqueModuleList uniqueModuleList = semester.getModules();
         for (Module module : uniqueModuleList) {
             UniqueTagList uniqueTagList = module.getTags();
-            DefaultTag completedTag = tags.getDefaultTag("Completed");
+            DefaultTag completedTag = moduleTags.getDefaultTag("Completed");
             if (uniqueTagList.contains(completedTag)) {
                 uniqueTagList.removeCompletedTag(completedTag);
             }
@@ -447,7 +481,8 @@ public class StudyPlan implements Cloneable {
         if (other == null) {
             return false;
         } else {
-            return this.index == other.index && this.modules == other.modules;
+            return this.index == other.index && this.modules == other.modules
+                    && this.studyPlanTags == other.studyPlanTags;
         }
     }
 
@@ -500,6 +535,46 @@ public class StudyPlan implements Cloneable {
     }
 
     /**
+     * Gets the number of core modules in the study plan.
+     */
+    public int getNumCoreModules() {
+        int countCores = 0;
+        for (Semester sem : semesters) {
+            for (Module mod : sem.getModules()) {
+                if (mod.getTags().containsTagWithName("Core")) {
+                    countCores++;
+                }
+            }
+        }
+        return countCores;
+    }
+
+    /**
+     * Returns a HashMap of focus area primary names as keys, and the number of modules satisfying it as the value.
+     */
+    public HashMap<String, Integer> getFocusPrimaries() {
+        List<String> tags = this.moduleTags
+                .asListOfStrings()
+                .stream()
+                .filter(x -> x.endsWith(":P]"))
+                .collect(Collectors.toList());
+        HashMap<String, Integer> mapTags = new HashMap<>();
+        // forgive me
+        tags.forEach(tag -> mapTags.put(tag.substring(1, tag.length() - 1), 0));
+        for (Semester sem : semesters) {
+            for (Module mod : sem.getModules()) {
+                for (String tag : tags) {
+                    String strippedTag = tag.substring(1, tag.length() - 1);
+                    if (mod.getTags().containsTagWithName(strippedTag)) {
+                        mapTags.put(strippedTag, mapTags.get(strippedTag) + 1);
+                    }
+                }
+            }
+        }
+        return mapTags;
+    }
+
+    /**
      * Returns a copy of the current study plan.
      *
      * @return a clone of this study plan.
@@ -523,7 +598,7 @@ public class StudyPlan implements Cloneable {
             }
         }
 
-        clone.tags = (UniqueTagList) tags.clone();
+        clone.moduleTags = (UniqueTagList) moduleTags.clone();
 
         return clone;
     }
@@ -536,28 +611,63 @@ public class StudyPlan implements Cloneable {
      * @return True if the tag was successfully added.
      */
     public boolean addTag(UserTag tag, String moduleCode) {
-        if (!tags.contains(tag)) {
-            tags.addTag(tag);
+        if (!moduleTags.contains(tag)) {
+            moduleTags.addTag(tag);
         }
         Module targetModule = modules.get(moduleCode);
         return targetModule.addTag(tag);
     }
 
     /**
-     * Checks if this study plan contains the given {@code UserTag}
-     *
-     * @param tagName The name of the tag to be checked.
-     * @return True if this study plan contains the tag.
+     * Adds a priority tag to the list of study plan tags.
      */
-    public boolean containsTag(String tagName) {
-        return tags.containsTagWithName(tagName);
+    public void addStudyPlanTag(Tag tag) throws InvalidTagException {
+        if (!tag.isDefault() && !tag.isPriority()) {
+            throw new InvalidTagException("Only priority tags or focus area tags can be attached to a study plan");
+        }
+        studyPlanTags.addTag(tag);
+    }
+
+    /**
+     * Removes a priority tag from the list of study plan tags.
+     */
+    public void removeStudyPlanTag(Tag tag) throws TagNotFoundException {
+        if (!studyPlanTags.contains(tag)) {
+            throw new TagNotFoundException();
+        }
+        studyPlanTags.removeTag(tag);
+    }
+
+    /**
+     * Checks if this study plan contains the given {@code Tag}
+     *
+     * @param tagName The name of the module tag to be checked.
+     * @return True if this study plan contains the module tag.
+     */
+    public boolean containsModuleTag(String tagName) {
+        return moduleTags.containsTagWithName(tagName);
+    }
+
+    /**
+     * Checks if this study plan has the given {@code Tag}.
+     */
+    public boolean containsStudyPlanTag(String tagName) {
+        return studyPlanTags.containsTagWithName(tagName);
+    }
+
+    public boolean containsPriorityTag() {
+        return studyPlanTags.containsPriorityTag();
+    }
+
+    public PriorityTag getPriorityTag() {
+        return studyPlanTags.getPriorityTag();
     }
 
     /**
      * Returns the tag in this study plan that corresponds to the given tag name.
      */
     public Tag getTag(String tagName) {
-        return tags.getTag(tagName);
+        return moduleTags.getTag(tagName);
     }
 
     /**
@@ -565,7 +675,7 @@ public class StudyPlan implements Cloneable {
      * Also removes it from all modules in this study plan that has the tag.
      */
     public void deleteTag(UserTag toDelete) {
-        tags.removeTag(toDelete);
+        moduleTags.removeTag(toDelete);
         Set<String> moduleCodes = modules.keySet();
         for (String moduleCode : moduleCodes) {
             Module currentModule = modules.get(moduleCode);
@@ -577,12 +687,17 @@ public class StudyPlan implements Cloneable {
      * Removes the given tag from all modules in this study plan that has the tag.
      * The tag is not deleted from this study plan.
      */
-    public void removeTagFromAllModules(UserTag toRemove) {
+    public boolean removeTagFromAllModules(UserTag toRemove) {
+        boolean anyRemoved = false;
         Set<String> moduleCodes = modules.keySet();
         for (String moduleCode : moduleCodes) {
             Module currentModule = modules.get(moduleCode);
-            currentModule.deleteUserTag(toRemove);
+            boolean removed = currentModule.deleteUserTag(toRemove);
+            if (removed) {
+                anyRemoved = true;
+            }
         }
+        return anyRemoved;
     }
 
     /**
@@ -595,19 +710,9 @@ public class StudyPlan implements Cloneable {
         return targetModule.deleteUserTag(toRemove);
     }
 
-    /**
-     * Returns all the tags that the module with the given module code is attached to.
-     *
-     * @return The UniqueTagList containing all the tags.
-     */
-    public UniqueTagList getModuleTags(String moduleCode) {
-        Module targetModule = modules.get(moduleCode);
-        return targetModule.getTags();
-    }
-
     @Override
     public String toString() {
-        return "Study Plan index: " + index + " Title: " + title.toString();
+        return "Study Plan Index: " + index + ", Title: " + title.toString();
     }
 
     @Override
@@ -618,7 +723,9 @@ public class StudyPlan implements Cloneable {
                     && this.semesters.equals(other.semesters)
                     && this.title.equals(other.title)
                     && this.currentSemester.equals(other.currentSemester)
-                    && this.modules.equals(other.modules);
+                    && this.modules.equals(other.modules)
+                    && this.moduleTags.equals(other.moduleTags)
+                    && this.studyPlanTags.equals(other.studyPlanTags);
         } else {
             return false;
         }

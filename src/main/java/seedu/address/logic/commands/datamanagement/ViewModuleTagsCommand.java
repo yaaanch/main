@@ -23,12 +23,15 @@ public class ViewModuleTagsCommand extends Command {
             + "viewtags CS3230";
 
     public static final String MESSAGE_SUCCESS = "All tags for the module shown";
+    public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "This module does not exist.";
+    public static final String MESSAGE_NO_TAGS_FOUND = "This module does not have any tags";
     private final String moduleCode;
 
     /**
      * Creates an {@code ViewModuleTagsCommand} to show all tags attached to the given module.
      */
     public ViewModuleTagsCommand(String moduleCode) {
+        requireNonNull(moduleCode);
         this.moduleCode = moduleCode;
     }
 
@@ -36,9 +39,26 @@ public class ViewModuleTagsCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (!model.isValidModuleCode(this.moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
+        }
+
         UniqueTagList tags = model.getModuleTagsFromActiveSp(moduleCode);
 
+        System.out.println(tags.asListOfStrings().size());
+
+        if (tags.asUnmodifiableObservableList().size() == 0) {
+            throw new CommandException(MESSAGE_NO_TAGS_FOUND);
+        }
+
         return new CommandResult(MESSAGE_SUCCESS, ResultViewType.TAG, tags.asUnmodifiableObservableList());
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof ViewModuleTagsCommand // instanceof handles nulls
+                && moduleCode.equals(((ViewModuleTagsCommand) other).moduleCode)); // state check
     }
 
 }

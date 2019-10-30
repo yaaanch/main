@@ -21,7 +21,9 @@ import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.module.Module;
 import seedu.address.model.semester.Semester;
 import seedu.address.model.semester.SemesterName;
+import seedu.address.model.semester.UniqueSemesterList;
 import seedu.address.model.studyplan.StudyPlan;
+import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UserTag;
@@ -214,22 +216,47 @@ public class DescriptionCommandTest {
         }
 
         @Override
-        public boolean addTagToActiveSp(UserTag tag, String moduleCode) {
+        public boolean addModuleTagToActiveSp(UserTag tag, String moduleCode) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean activeSpContainsTag(String tagName) {
+        public void addStudyPlanTagToSp(Tag tag, int index) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteTagFromActiveSp(UserTag toDelete) {
+        public void removeStudyPlanTagFromSp(Tag tag, int index) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void removeTagFromAllModulesInActiveSp(UserTag toRemove) {
+        public boolean spContainsPriorityTag(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public PriorityTag getPriorityTagFromSp(int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean activeSpContainsModuleTag(String tagName) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean spContainsStudyPlanTag(String tagName, int index) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteModuleTagFromActiveSp(UserTag toDelete) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean removeTagFromAllModulesInActiveSp(UserTag toRemove) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -244,12 +271,12 @@ public class DescriptionCommandTest {
         }
 
         @Override
-        public Tag getTagFromActiveSp(String tagName) {
+        public Tag getModuleTagFromActiveSp(String tagName) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public UniqueTagList getTagsFromActiveSp() {
+        public UniqueTagList getModuleTagsFromActiveSp() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -260,6 +287,16 @@ public class DescriptionCommandTest {
 
         @Override
         public HashMap<String, Module> getModulesFromActiveSp() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UniqueSemesterList getSemestersFromActiveSp() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public StudyPlan getStudyPlan(int index) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -280,17 +317,17 @@ public class DescriptionCommandTest {
 
         @Override
         public void undoModulePlanner() {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void redoModulePlanner() {
-
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void addToHistory() {
-
+            throw new AssertionError("This method should not be called.");
         }
     }
 

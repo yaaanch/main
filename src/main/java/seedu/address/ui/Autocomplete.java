@@ -17,7 +17,7 @@ import seedu.address.logic.commands.cli.DeleteModuleCommand;
 import seedu.address.logic.commands.cli.NameUeFromSemesterCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
 import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
-import seedu.address.logic.commands.datamanagement.FindCommand;
+import seedu.address.logic.commands.datamanagement.FindModuleCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromAllCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromModuleCommand;
 import seedu.address.logic.commands.datamanagement.RenameTagCommand;
@@ -29,7 +29,7 @@ import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
 import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.ClearCommand;
-import seedu.address.logic.commands.storage.CommitStudyPlanEditCommand;
+import seedu.address.logic.commands.storage.CommitStudyPlanCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
 import seedu.address.logic.commands.storage.DeleteCommand;
 import seedu.address.logic.commands.storage.DeleteCommitCommand;
@@ -163,9 +163,9 @@ public class Autocomplete extends TextField {
         commandKeywords.add(DeleteModuleCommand.COMMAND_WORD);
         commandKeywords.add(NameUeFromSemesterCommand.COMMAND_WORD);
         commandKeywords.add(SetCurrentSemesterCommand.COMMAND_WORD);
-        commandKeywords.add(FindCommand.COMMAND_WORD);
+        commandKeywords.add(FindModuleCommand.COMMAND_WORD);
         commandKeywords.add(ClearCommand.COMMAND_WORD);
-        commandKeywords.add(CommitStudyPlanEditCommand.COMMAND_WORD);
+        commandKeywords.add(CommitStudyPlanCommand.COMMAND_WORD);
         commandKeywords.add(CreateStudyPlanCommand.COMMAND_WORD);
         commandKeywords.add(DeleteCommand.COMMAND_WORD);
         commandKeywords.add(DeleteCommitCommand.COMMAND_WORD);
@@ -201,7 +201,7 @@ public class Autocomplete extends TextField {
      * Resets the argument keywords when there is a change in the active study plan.
      */
     public void handleChangeOfActiveStudyPlan() {
-        tags = modulePlanner.getActiveStudyPlan().getTags();
+        tags = modulePlanner.getActiveStudyPlan().getModuleTags();
         tags.asUnmodifiableObservableList().addListener((ListChangeListener<Tag>) change
             -> generateArgumentKeywords());
         generateArgumentKeywords();

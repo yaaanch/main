@@ -22,6 +22,11 @@ public class DefaultTagTest {
     }
 
     @Test
+    public void isPriority() {
+        assertFalse(new TagBuilder().buildDefaultCoreTag().isPriority());
+    }
+
+    @Test
     public void getTagName() {
         assertEquals("Core", new TagBuilder().buildDefaultCoreTag().getTagName());
     }
@@ -30,6 +35,12 @@ public class DefaultTagTest {
     public void getDefaultTagType() {
         DefaultTag defaultTag = new TagBuilder().buildDefaultCoreTag();
         assertEquals(DefaultTagType.CORE, defaultTag.getDefaultTagType());
+    }
+
+    @Test
+    public void getDescription() {
+        DefaultTag defaultTag = new TagBuilder().buildDefaultCoreTag();
+        assertEquals(DefaultTagType.CORE.getDescription(), defaultTag.getDescription());
     }
 
     @Test

@@ -29,6 +29,15 @@ public class DefaultTag implements Tag {
     }
 
     /**
+     * Checks if the tag is a priority tag.
+     *
+     * @return False.
+     */
+    public boolean isPriority() {
+        return false;
+    }
+
+    /**
      * Returns the default tag type of the current tag.
      *
      * @return The default tag type.
@@ -44,6 +53,13 @@ public class DefaultTag implements Tag {
      */
     public String getTagName() {
         return defaultTagType.getDefaultTagTypeName();
+    }
+
+    /**
+     * Returns the description of the default tag type.
+     */
+    public String getDescription() {
+        return defaultTagType.getDescription();
     }
 
     /**

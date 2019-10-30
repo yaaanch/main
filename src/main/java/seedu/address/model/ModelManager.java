@@ -17,8 +17,10 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.semester.Semester;
 import seedu.address.model.semester.SemesterName;
+import seedu.address.model.semester.UniqueSemesterList;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.studyplan.exceptions.StudyPlanNotFoundException;
+import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UserTag;
@@ -236,13 +238,26 @@ public class ModelManager implements Model {
             return false;
         }
 
-        // state check
+        // state checks
         ModelManager other = (ModelManager) obj;
-        return modulePlanner.equals(other.modulePlanner)
-                && userPrefs.equals(other.userPrefs)
-                && filteredStudyPlans.equals(other.filteredStudyPlans);
-    }
 
+        // check filtered study plans
+        try {
+            for (int i = 0; i < filteredStudyPlans.size(); i++) {
+                StudyPlan sp1 = filteredStudyPlans.get(i);
+                StudyPlan sp2 = other.filteredStudyPlans.get(i);
+                if (!sp1.getTitle().equals(sp2.getTitle())) {
+                    return false;
+                }
+            }
+        } catch (IndexOutOfBoundsException e) {
+
+            return false;
+        }
+
+        return modulePlanner.equals(other.modulePlanner)
+                && userPrefs.equals(other.userPrefs);
+    }
 
     @Override
     public boolean semesterHasModule(String moduleCode, SemesterName semesterName) {
@@ -298,19 +313,39 @@ public class ModelManager implements Model {
 
     // ===================== TAGGING ==========================
 
-    public boolean addTagToActiveSp(UserTag tag, String moduleCode) {
+    public boolean addModuleTagToActiveSp(UserTag tag, String moduleCode) {
         return modulePlanner.addTagToActiveSp(tag, moduleCode);
     }
 
-    public boolean activeSpContainsTag(String tagName) {
-        return modulePlanner.activeSpContainsTag(tagName);
+    public void addStudyPlanTagToSp(Tag tag, int index) {
+        modulePlanner.addStudyPlanTagToSp(tag, index);
     }
 
-    public Tag getTagFromActiveSp(String tagName) {
+    public void removeStudyPlanTagFromSp(Tag tag, int index) {
+        modulePlanner.removeStudyPlanTagFromSp(tag, index);
+    }
+
+    public PriorityTag getPriorityTagFromSp(int index) {
+        return modulePlanner.getPriorityTagFromSp(index);
+    }
+
+    public boolean spContainsPriorityTag(int index) {
+        return modulePlanner.spContainsPriorityTag(index);
+    }
+
+    public boolean activeSpContainsModuleTag(String tagName) {
+        return modulePlanner.activeSpContainsModuleTag(tagName);
+    }
+
+    public boolean spContainsStudyPlanTag(String tagName, int index) {
+        return modulePlanner.spContainsStudyPlanTag(tagName, index);
+    }
+
+    public Tag getModuleTagFromActiveSp(String tagName) {
         return modulePlanner.getTagFromActiveSp(tagName);
     }
 
-    public UniqueTagList getTagsFromActiveSp() {
+    public UniqueTagList getModuleTagsFromActiveSp() {
         return modulePlanner.getTagsFromActiveSp();
     }
 
@@ -318,12 +353,12 @@ public class ModelManager implements Model {
         return modulePlanner.getModuleTagsFromActiveSp(moduleCode);
     }
 
-    public void deleteTagFromActiveSp(UserTag toDelete) {
+    public void deleteModuleTagFromActiveSp(UserTag toDelete) {
         modulePlanner.deleteTagFromActiveSp(toDelete);
     }
 
-    public void removeTagFromAllModulesInActiveSp(UserTag toRemove) {
-        modulePlanner.removeTagFromAllModulesInActiveSp(toRemove);
+    public boolean removeTagFromAllModulesInActiveSp(UserTag toRemove) {
+        return modulePlanner.removeTagFromAllModulesInActiveSp(toRemove);
     }
 
     public boolean removeTagFromModuleInActiveSp(UserTag toRemove, String moduleCode) {
@@ -336,6 +371,14 @@ public class ModelManager implements Model {
 
     public HashMap<String, Module> getModulesFromActiveSp() {
         return modulePlanner.getModulesFromActiveSp();
+    }
+
+    public UniqueSemesterList getSemestersFromActiveSp() {
+        return modulePlanner.getSemestersFromActiveSp();
+    }
+
+    public StudyPlan getStudyPlan(int index) {
+        return modulePlanner.getStudyPlan(index);
     }
 
     //=========== Undo/Redo =================================================================================

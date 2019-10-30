@@ -58,12 +58,23 @@ public class ViewCommitCommand extends Command {
             StudyPlan studyPlan = commit.getStudyPlan();
             ObservableList<Semester> semesters = studyPlan.getSemesters().asUnmodifiableObservableList();
 
-            return new CommandResult<>(MESSAGE_SUCCESS, ResultViewType.STUDY_PLAN, semesters);
+            return new CommandResult<>(MESSAGE_SUCCESS, ResultViewType.SEMESTER, semesters);
         } catch (StudyPlanCommitManagerNotFoundException e) {
             return new CommandResult(MESSAGE_NO_COMMIT_HISTORY);
         } catch (IndexOutOfBoundsException e) {
             return new CommandResult(MESSAGE_NO_SUCH_COMMIT);
         }
 
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        } else if (obj instanceof ViewCommitCommand) {
+            return this.commitNumber == ((ViewCommitCommand) obj).commitNumber
+                    && this.studyPlanIndex == ((ViewCommitCommand) obj).studyPlanIndex;
+        }
+        return false;
     }
 }

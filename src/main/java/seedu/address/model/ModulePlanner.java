@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.ObservableList;
@@ -13,10 +12,12 @@ import seedu.address.model.module.Name;
 import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.semester.Semester;
 import seedu.address.model.semester.SemesterName;
+import seedu.address.model.semester.UniqueSemesterList;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.studyplan.Title;
 import seedu.address.model.studyplan.UniqueStudyPlanList;
 import seedu.address.model.studyplan.exceptions.StudyPlanNotFoundException;
+import seedu.address.model.tag.PriorityTag;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.tag.UserTag;
@@ -36,7 +37,7 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
     private final ModulesInfo modulesInfo;
     private final VersionTrackingManager versionTrackingManager;
     private StudyPlan activeStudyPlan;
-    private SemesterName currentSemester;
+    private SemesterName currentSemester = SemesterName.Y1S1; // default value
 
     public ModulePlanner() {
         studyPlans = new UniqueStudyPlanList();
@@ -133,7 +134,7 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
      * Returns the current active tags.
      */
     public UniqueTagList getActiveTags() {
-        return activeStudyPlan.getTags();
+        return activeStudyPlan.getModuleTags();
     }
 
     /**
@@ -142,7 +143,6 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
      */
     public StudyPlan activateStudyPlan(int index) throws StudyPlanNotFoundException {
         boolean foundStudyPlan = false;
-        Iterator<StudyPlan> iterator = studyPlans.iterator();
         for (StudyPlan studyPlan : studyPlans) {
             if (studyPlan.getIndex() == index) {
                 activeStudyPlan = studyPlan;
@@ -156,6 +156,8 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
 
         // if this active study plan has already been activated before, then no need to activate it again.
         if (activeStudyPlan.isActivated()) {
+            // Even if it's been activated before, we need to update whether its prerequisites have been satisfied
+            activeStudyPlan.updatePrereqs();
             return activeStudyPlan;
         }
 
@@ -180,20 +182,40 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
             UniqueModuleList uniqueModuleList = semester.getModules();
             for (Module skeletalModule : uniqueModuleList) {
                 Module actualModule = megaModuleHash.get(skeletalModule.getModuleCode().toString());
-                uniqueModuleList.setModule(skeletalModule, actualModule);
+                // if (skeletalModule != actualModule) {
+                if (!skeletalModule.equals(actualModule)) {
+                    uniqueModuleList.setModule(skeletalModule, actualModule);
+                }
             }
         }
 
-        // TODO: get user-defined tags from mega tag list, and make the tags refer to the megalist of tags
-        // TODO: this is done?
+        // replaces the module tags with the reference to the actual tags in study plan mega tag list
+        UniqueTagList megaModuleTagList = activeStudyPlan.getModuleTags();
         for (Module module : megaModuleHash.values()) {
             UniqueTagList tagList = module.getTags();
+            UniqueTagList newTagList = changeTagPointers(tagList, megaModuleTagList);
+            module.setTags(newTagList);
         }
 
         activeStudyPlan.updatePrereqs();
         activeStudyPlan.setActivated(true);
 
         return activeStudyPlan;
+    }
+
+    /**
+     * Changes the tags in module tag list to point to the actual tag object in study plan during activation.
+     */
+    private UniqueTagList changeTagPointers(UniqueTagList moduleTagList, UniqueTagList megaTagList) {
+        UniqueTagList newTagList = new UniqueTagList();
+        for (Tag tag : moduleTagList) {
+            for (Tag actualTag : megaTagList) {
+                if (tag.equals(actualTag)) {
+                    newTagList.addTag(actualTag);
+                }
+            }
+        }
+        return newTagList;
     }
 
     /**
@@ -230,18 +252,8 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
     }
 
     /**
-<<<<<<< HEAD
-     * Sets the current semester. The user cannot change any module before the current semester. But they can
-     * still change those in the current semester and after the current semester.
-     */
-    public void setCurrentSemester(SemesterName semesterName) {
-        currentSemester = semesterName;
-        activeStudyPlan.setCurrentSemester(semesterName);
-    }
-
-    /**
-=======
->>>>>>> Undo redo updates, still not working
+     * =======
+     * >>>>>>> Undo redo updates, still not working
      * Returns the current semester. The user cannot change any module before the current semester. But they can
      * still change those in the current semester and after the current semester.
      *
@@ -249,6 +261,19 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
      */
     public SemesterName getCurrentSemester() {
         return currentSemester;
+    }
+
+    /**
+     * <<<<<<< HEAD
+     * Sets the current semester. The user cannot change any module before the current semester. But they can
+     * still change those in the current semester and after the current semester.
+     */
+    public void setCurrentSemester(SemesterName semesterName) {
+        currentSemester = semesterName;
+        for (StudyPlan studyPlan : this.studyPlans) {
+            studyPlan.setCurrentSemester(currentSemester);
+        }
+        activeStudyPlan.setCurrentSemester(semesterName);
     }
 
     /**
@@ -377,8 +402,28 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
         return activeStudyPlan.addTag(tag, moduleCode);
     }
 
-    public boolean activeSpContainsTag(String tagName) {
-        return activeStudyPlan.containsTag(tagName);
+    public void addStudyPlanTagToSp(Tag tag, int index) {
+        studyPlans.getStudyPlanByIndex(index).addStudyPlanTag(tag);
+    }
+
+    public void removeStudyPlanTagFromSp(Tag tag, int index) {
+        studyPlans.getStudyPlanByIndex(index).removeStudyPlanTag(tag);
+    }
+
+    public boolean spContainsPriorityTag(int index) {
+        return studyPlans.getStudyPlanByIndex(index).containsPriorityTag();
+    }
+
+    public PriorityTag getPriorityTagFromSp(int index) {
+        return studyPlans.getStudyPlanByIndex(index).getPriorityTag();
+    }
+
+    public boolean activeSpContainsModuleTag(String tagName) {
+        return activeStudyPlan.containsModuleTag(tagName);
+    }
+
+    public boolean spContainsStudyPlanTag(String tagName, int index) {
+        return studyPlans.getStudyPlanByIndex(index).containsStudyPlanTag(tagName);
     }
 
     public Tag getTagFromActiveSp(String tagName) {
@@ -386,7 +431,7 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
     }
 
     public UniqueTagList getTagsFromActiveSp() {
-        return activeStudyPlan.getTags();
+        return activeStudyPlan.getModuleTags();
     }
 
     public UniqueTagList getModuleTagsFromActiveSp(String moduleCode) {
@@ -397,8 +442,8 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
         activeStudyPlan.deleteTag(toDelete);
     }
 
-    public void removeTagFromAllModulesInActiveSp(UserTag toRemove) {
-        activeStudyPlan.removeTagFromAllModules(toRemove);
+    public boolean removeTagFromAllModulesInActiveSp(UserTag toRemove) {
+        return activeStudyPlan.removeTagFromAllModules(toRemove);
     }
 
     public boolean removeTagFromModuleInActiveSp(UserTag toRemove, String moduleCode) {
@@ -407,6 +452,14 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
 
     public void updateAllCompletedTags() {
         activeStudyPlan.updateAllCompletedTags();
+    }
+
+    public UniqueSemesterList getSemestersFromActiveSp() {
+        return activeStudyPlan.getSemesters();
+    }
+
+    public StudyPlan getStudyPlan(int index) {
+        return studyPlans.getStudyPlanByIndex(index);
     }
 
     //=========== Util Methods =================================================================================
@@ -427,13 +480,42 @@ public class ModulePlanner implements ReadOnlyModulePlanner {
 
     @Override
     public boolean equals(Object other) {
+        /*
         return other == this // short circuit if same object
                 || (other instanceof ModulePlanner // instanceof handles nulls
                 && studyPlans.equals(((ModulePlanner) other).studyPlans));
+         */
+
+        if (other == this) {
+            // short circuit if same object
+            return true;
+        }
+
+        if (!(other instanceof ModulePlanner)) {
+            return false; // instanceof handles nulls
+        }
+
+        ModulePlanner otherMp = (ModulePlanner) other;
+        // check study plan list
+        try {
+            for (int i = 0; i < studyPlans.getSize(); i++) {
+                StudyPlan sp1 = studyPlans.asUnmodifiableObservableList().get(i);
+                StudyPlan sp2 = otherMp.studyPlans.asUnmodifiableObservableList().get(i);
+                if (!sp1.getTitle().equals(sp2.getTitle())) {
+                    return false;
+                }
+            }
+        } catch (IndexOutOfBoundsException e) {
+            return false;
+        }
+
+        // check version tracking manager
+        return versionTrackingManager.equals(((ModulePlanner) other).versionTrackingManager);
     }
 
     @Override
     public int hashCode() {
         return studyPlans.hashCode();
     }
+
 }

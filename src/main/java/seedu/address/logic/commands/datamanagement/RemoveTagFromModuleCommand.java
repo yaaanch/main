@@ -16,16 +16,17 @@ import seedu.address.model.tag.exceptions.TagNotFoundException;
  */
 public class RemoveTagFromModuleCommand extends Command {
 
-    public static final String COMMAND_WORD = "removetag";
+    public static final String COMMAND_WORD = "removemodtag";
     public static final String HELP_MESSAGE = COMMAND_WORD + ": Removing a tag from a module";
     public static final String MESSAGE_USAGE = COMMAND_WORD + " : Removes the specified tag from the specified module "
             + "Parameters: "
             + "MODULE_CODE "
             + "TAG_NAME \n"
             + "Example: "
-            + "remove CS3230 exchange";
+            + "removemodtag CS3230 exchange";
 
     public static final String MESSAGE_SUCCESS = "Tag %1$s removed from %2$s";
+    public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "This module does not exist.";
     public static final String MESSAGE_TAG_NOT_FOUND = "The module %1$s does not have the tag [%2$s]";
     public static final String MESSAGE_INVALID_DEFAULT_TAG_MODIFICATION = "Default tags cannot be removed";
 
@@ -49,9 +50,13 @@ public class RemoveTagFromModuleCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
+        if (!model.isValidModuleCode(this.moduleCode)) {
+            throw new CommandException(MESSAGE_MODULE_DOES_NOT_EXIST);
+        }
+
         Tag toRemove;
         try {
-            toRemove = model.getTagFromActiveSp(tagName);
+            toRemove = model.getModuleTagFromActiveSp(tagName);
         } catch (TagNotFoundException exception) {
             throw new CommandException(String.format(MESSAGE_TAG_NOT_FOUND, moduleCode, tagName));
         }
@@ -67,6 +72,14 @@ public class RemoveTagFromModuleCommand extends Command {
         }
         model.addToHistory();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toRemove, moduleCode));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RemoveTagFromModuleCommand // instanceof handles nulls
+                && tagName.equals(((RemoveTagFromModuleCommand) other).tagName)
+                && moduleCode.equals(((RemoveTagFromModuleCommand) other).moduleCode)); // state check
     }
 
 }

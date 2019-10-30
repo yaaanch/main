@@ -34,6 +34,9 @@ public class UniqueTagList implements Iterable<Tag>, Cloneable {
             FXCollections.unmodifiableObservableList(internalList);
     private final HashMap<String, Tag> mapTags = new HashMap<String, Tag>();
 
+    private boolean containsPriorityTag = false;
+    private PriorityTag priorityTag = null;
+
     /**
      * Constructs a {@code UniqueTagList}.
      */
@@ -67,6 +70,10 @@ public class UniqueTagList implements Iterable<Tag>, Cloneable {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
             throw new DuplicateTagException();
+        }
+        if (toAdd.isPriority()) {
+            containsPriorityTag = true;
+            priorityTag = (PriorityTag) toAdd;
         }
         internalList.add(toAdd);
         mapTags.put(toAdd.getTagName().toUpperCase(), toAdd);
@@ -141,6 +148,10 @@ public class UniqueTagList implements Iterable<Tag>, Cloneable {
         if (!internalList.remove(toRemove)) {
             throw new TagNotFoundException();
         }
+        if (toRemove.isPriority()) {
+            containsPriorityTag = false;
+            priorityTag = null;
+        }
         mapTags.remove(toRemove.getTagName());
     }
 
@@ -192,8 +203,8 @@ public class UniqueTagList implements Iterable<Tag>, Cloneable {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof seedu.address.model.tag.UniqueTagList // instanceof handles nulls
-                && internalList.equals(((seedu.address.model.tag.UniqueTagList) other).internalList));
+                || (other instanceof UniqueTagList // instanceof handles nulls
+                && internalList.equals(((UniqueTagList) other).internalList));
     }
 
     @Override
@@ -241,6 +252,23 @@ public class UniqueTagList implements Iterable<Tag>, Cloneable {
         for (DefaultTagType defaultTagType : DefaultTagType.values()) {
             addTag(new DefaultTag(defaultTagType));
         }
+    }
+
+    /**
+     * Updates the hashmap of tags when tags are renamed.
+     */
+    public void updateTagMaps(String originalTagName, String newTagName) {
+        Tag tag = mapTags.get(originalTagName.toUpperCase());
+        mapTags.remove(originalTagName.toUpperCase());
+        mapTags.put(newTagName.toUpperCase(), tag);
+    }
+
+    public boolean containsPriorityTag() {
+        return containsPriorityTag;
+    }
+
+    public PriorityTag getPriorityTag() {
+        return priorityTag;
     }
 
 }

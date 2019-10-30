@@ -6,6 +6,7 @@ import seedu.address.model.PrereqTree;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Name;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -17,7 +18,7 @@ public class ModuleBuilder {
     public static final int DEFAULT_MC_COUNT = 4;
     public static final Color DEFAULT_COLOR = Color.RED;
     public static final boolean DEFAULT_PREREQS_SATISFIED = true;
-    public static final String DEFAULT_MODULE_CODE = "CS1231";
+    public static final String DEFAULT_MODULE_CODE = "CS1231S";
     public static final PrereqTree DEFAULT_PREREQ_TREE = null;
 
     private ModuleCode moduleCode;
@@ -66,8 +67,17 @@ public class ModuleBuilder {
      */
     public ModuleBuilder withTags(String... tags) {
         this.tags = new UniqueTagList();
-        this.tags.initDefaultTags();
-        this.tags.setTags(SampleDataUtil.getTagList(tags));
+        this.tags.setTags(SampleDataUtil.getUserTagList(tags));
+        return this;
+    }
+
+    /**
+     * Sets the tags to the list of tags in the module
+     */
+    public ModuleBuilder withTags(Tag... tags) {
+        for (Tag tag : tags) {
+            this.tags.addTag(tag);
+        }
         return this;
     }
 

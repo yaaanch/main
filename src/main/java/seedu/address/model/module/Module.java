@@ -18,7 +18,6 @@ import seedu.address.model.tag.UserTag;
 public class Module implements Cloneable {
 
     private final ModuleCode moduleCode;
-    // Identity fields
     private Name name;
     private int mcCount;
     private Color color;
@@ -147,10 +146,17 @@ public class Module implements Cloneable {
     }
 
     /**
+     * Changes the tag list of the module.
+     *
+     * @param tags
+     */
+    public void setTags(UniqueTagList tags) {
+        this.tags = tags;
+    }
+
+    /**
      * This method verifies previous semester codes against the prerequisite tree, and updates its
      * {@code prereqsSatisfied} property accordingly.
-     * <p>
-     * <<<<<<< HEAD
      *
      * @param prevSemCodes Codes of modules taken in previous semesters
      */
@@ -161,9 +167,6 @@ public class Module implements Cloneable {
     /**
      * This method verifies previous semester codes against the prerequisite tree, but does not update its
      * {@code prereqsSatisfied} property, instead returning a boolean value.
-     * <p>
-     * =======
-     * >>>>>>> upstream/undoredo-fix
      *
      * @param prevSemCodes Codes of modules taken in previous semesters
      */
@@ -191,7 +194,13 @@ public class Module implements Cloneable {
             return false;
         }
 
-        return this.moduleCode.equals(((Module) other).moduleCode);
+        if ((tags == null && ((Module) other).tags != null) || (tags != null && ((Module) other).tags == null)) {
+            return false;
+        } else if (tags == null && ((Module) other).tags == null) {
+            return this.moduleCode.equals(((Module) other).moduleCode);
+        } else {
+            return this.moduleCode.equals(((Module) other).moduleCode) && this.tags.equals(((Module) other).tags);
+        }
     }
 
     @Override
