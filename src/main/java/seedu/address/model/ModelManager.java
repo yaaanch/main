@@ -155,6 +155,13 @@ public class ModelManager implements Model {
         modulePlanner.deleteAllModulesInSemester(semesterName);
     }
 
+    @Override
+    public void deleteSemester(SemesterName semesterName) {
+        requireNonNull(semesterName);
+
+        modulePlanner.deleteSemester(semesterName);
+    }
+
     //=========== Version Tracking ============================================================================
 
     @Override
@@ -251,7 +258,6 @@ public class ModelManager implements Model {
                 }
             }
         } catch (IndexOutOfBoundsException e) {
-
             return false;
         }
 
@@ -284,7 +290,6 @@ public class ModelManager implements Model {
                 return current;
             }
         }
-        System.out.println("ERROR HERE");
         return null;
     }
 
@@ -294,23 +299,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean semesterHasUe(SemesterName semesterName) {
-        // TODO: UE implementation
-        // getSemester(semesterName).getModules().
-        return true;
-    }
-
-    @Override
-    public void renameUeInSemester(SemesterName semesterName, String moduleCode) {
-        // TODO: UE implementation
-    }
-
-    @Override
     public void blockSemester(SemesterName sem, String reason) {
-        // TODO: blockSemester in StudyPlan class
-        // this.modulePlanner.getActiveStudyPlan().blockSemester(semester);
+        this.modulePlanner.getActiveStudyPlan().blockSemester(sem, reason);
     }
 
+    @Override
+    public void unblockSemester(SemesterName sem) {
+        this.modulePlanner.getActiveStudyPlan().unblockSemester(sem);
+    }
     // ===================== TAGGING ==========================
 
     public boolean addModuleTagToActiveSp(UserTag tag, String moduleCode) {
@@ -377,7 +373,7 @@ public class ModelManager implements Model {
         return modulePlanner.getSemestersFromActiveSp();
     }
 
-    public StudyPlan getStudyPlan(int index) {
+    public StudyPlan getStudyPlan(int index) throws StudyPlanNotFoundException {
         return modulePlanner.getStudyPlan(index);
     }
 
