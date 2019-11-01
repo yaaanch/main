@@ -68,83 +68,123 @@ public class HelpCommandTest {
     public void execute_helpWithCommand_success() throws CommandException {
         CommandResult expectedCommandResult = new CommandResult(AddModuleCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(AddModuleCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(BlockCurrentSemesterCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(BlockCurrentSemesterCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(DeleteModuleCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(DeleteModuleCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
+
         expectedCommandResult = new CommandResult(RedoCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(RedoCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(SetCurrentSemesterCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(SetCurrentSemesterCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(UnblockCurrentSemesterCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(UnblockCurrentSemesterCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(UndoCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(UndoCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(DeleteTagCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(DeleteTagCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(FindModuleCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(FindModuleCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(RemoveAllTagsCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(RemoveAllTagsCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(RemoveTagFromAllCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(RemoveTagFromAllCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(RemoveTagFromModuleCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(RemoveTagFromModuleCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(RemoveTagFromStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(RemoveTagFromStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(RenameTagCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(RenameTagCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(SortStudyPlansByPriorityTagCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(SortStudyPlansByPriorityTagCommand.COMMAND_WORD).execute(model),
-                expectedCommandResult);
+            expectedCommandResult);
+
         expectedCommandResult = new CommandResult(TagModuleCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(TagModuleCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(TagStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(TagStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ViewAllTagsCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ViewAllTagsCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ViewDefaultTagsCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ViewDefaultTagsCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ViewModuleTagsCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ViewModuleTagsCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ViewTaggedCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ViewTaggedCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(HelpCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(HelpCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ActivateStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ActivateStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(AddSemesterCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(AddSemesterCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(CommitStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(CommitStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(CreateStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(CreateStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(DefaultStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(DefaultStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(DeleteStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(DeleteStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(DeleteCommitCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(DeleteCommitCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(DeleteSemesterCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(DeleteSemesterCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(EditTitleCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(EditTitleCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ListAllStudyPlansCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ListAllStudyPlansCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(RevertCommitCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(RevertCommitCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ViewCommitCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ViewCommitCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ViewCommitHistoryCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ViewCommitHistoryCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ViewStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ViewStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(CheckCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(CheckCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(DescriptionCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(DescriptionCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ValidModsCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ValidModsCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
         expectedCommandResult = new CommandResult(ExitCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ExitCommand.COMMAND_WORD).execute(model), expectedCommandResult);
     }

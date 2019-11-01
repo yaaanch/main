@@ -103,6 +103,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         case ViewStudyPlanCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
             return new HelpCommand(commandName);
+
         default:
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));

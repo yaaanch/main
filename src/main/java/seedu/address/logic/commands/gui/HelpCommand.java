@@ -123,86 +123,127 @@ public class HelpCommand extends Command {
         switch (commandName) {
         case AddModuleCommand.COMMAND_WORD:
             return new CommandResult(AddModuleCommand.MESSAGE_USAGE, false, false);
+
         case BlockCurrentSemesterCommand.COMMAND_WORD:
             return new CommandResult(BlockCurrentSemesterCommand.MESSAGE_USAGE, false, false);
+
         case DeleteModuleCommand.COMMAND_WORD:
             return new CommandResult(DeleteModuleCommand.MESSAGE_USAGE, false, false);
+
         case SetCurrentSemesterCommand.COMMAND_WORD:
             return new CommandResult(SetCurrentSemesterCommand.MESSAGE_USAGE, false, false);
+
         case UnblockCurrentSemesterCommand.COMMAND_WORD:
             return new CommandResult(UnblockCurrentSemesterCommand.MESSAGE_USAGE, false, false);
+
         case FindModuleCommand.COMMAND_WORD:
             return new CommandResult(FindModuleCommand.MESSAGE_USAGE, false, false);
+
         case DescriptionCommand.COMMAND_WORD:
             return new CommandResult(DescriptionCommand.MESSAGE_USAGE, false, false);
+
         case CheckCommand.COMMAND_WORD:
             return new CommandResult(CheckCommand.MESSAGE_USAGE, false, false);
+
         case ValidModsCommand.COMMAND_WORD:
             return new CommandResult(ValidModsCommand.MESSAGE_USAGE, false, false);
+
         case CommitStudyPlanCommand.COMMAND_WORD:
             return new CommandResult(CommitStudyPlanCommand.MESSAGE_USAGE, false, false);
+
         case CreateStudyPlanCommand.COMMAND_WORD:
             return new CommandResult(CreateStudyPlanCommand.MESSAGE_USAGE, false, false);
+
         case DeleteStudyPlanCommand.COMMAND_WORD:
             return new CommandResult(DeleteStudyPlanCommand.MESSAGE_USAGE, false, false);
+
         case TagModuleCommand.COMMAND_WORD:
             return new CommandResult(TagModuleCommand.MESSAGE_USAGE, false, false);
+
         case ViewCommitHistoryCommand.COMMAND_WORD:
             return new CommandResult(ViewCommitHistoryCommand.MESSAGE_USAGE, false, false);
+
         case RemoveTagFromModuleCommand.COMMAND_WORD:
             return new CommandResult(RemoveTagFromModuleCommand.MESSAGE_USAGE, false, false);
+
         case ViewModuleTagsCommand.COMMAND_WORD:
             return new CommandResult(ViewModuleTagsCommand.MESSAGE_USAGE, false, false);
+
         case DeleteTagCommand.COMMAND_WORD:
             return new CommandResult(DeleteTagCommand.MESSAGE_USAGE, false, false);
+
         case RemoveTagFromAllCommand.COMMAND_WORD:
             return new CommandResult(RemoveTagFromAllCommand.MESSAGE_USAGE, false, false);
+
         case EditTitleCommand.COMMAND_WORD:
             return new CommandResult(EditTitleCommand.MESSAGE_USAGE, false, false);
+
         case ActivateStudyPlanCommand.COMMAND_WORD:
             return new CommandResult(ActivateStudyPlanCommand.MESSAGE_USAGE, false, false);
+
         case ListAllStudyPlansCommand.COMMAND_WORD:
             return new CommandResult(ListAllStudyPlansCommand.MESSAGE_USAGE, false, false);
+
         case RevertCommitCommand.COMMAND_WORD:
             return new CommandResult(RevertCommitCommand.MESSAGE_USAGE, false, false);
+
         case RedoCommand.COMMAND_WORD:
             return new CommandResult(RedoCommand.MESSAGE_USAGE, false, false);
+
         case UndoCommand.COMMAND_WORD:
             return new CommandResult(UndoCommand.MESSAGE_USAGE, false, false);
+
         case HelpCommand.COMMAND_WORD:
             return new CommandResult(HelpCommand.MESSAGE_USAGE, false, false);
+
         case ViewDefaultTagsCommand.COMMAND_WORD:
             return new CommandResult(ViewDefaultTagsCommand.MESSAGE_USAGE, false, false);
+
         case ViewTaggedCommand.COMMAND_WORD:
             return new CommandResult(ViewTaggedCommand.MESSAGE_USAGE, false, false);
+
         case ViewAllTagsCommand.COMMAND_WORD:
             return new CommandResult(ViewAllTagsCommand.MESSAGE_USAGE, false, false);
+
         case RemoveAllTagsCommand.COMMAND_WORD:
             return new CommandResult(RemoveAllTagsCommand.MESSAGE_USAGE, false, false);
+
         case DeleteCommitCommand.COMMAND_WORD:
             return new CommandResult(DeleteCommitCommand.MESSAGE_USAGE, false, false);
+
         case DefaultStudyPlanCommand.COMMAND_WORD:
             return new CommandResult(DefaultStudyPlanCommand.MESSAGE_USAGE, false, false);
+
         case DeleteSemesterCommand.COMMAND_WORD:
             return new CommandResult(DeleteSemesterCommand.MESSAGE_USAGE, false, false);
+
         case ViewCommitCommand.COMMAND_WORD:
             return new CommandResult(ViewCommitCommand.MESSAGE_USAGE, false, false);
+
         case RenameTagCommand.COMMAND_WORD:
             return new CommandResult(RenameTagCommand.MESSAGE_USAGE, false, false);
+
         case TagStudyPlanCommand.COMMAND_WORD:
             return new CommandResult(TagStudyPlanCommand.MESSAGE_USAGE, false, false);
+
         case RemoveTagFromStudyPlanCommand.COMMAND_WORD:
             return new CommandResult(RemoveTagFromStudyPlanCommand.MESSAGE_USAGE, false, false);
+
         case SortStudyPlansByPriorityTagCommand.COMMAND_WORD:
             return new CommandResult(SortStudyPlansByPriorityTagCommand.MESSAGE_USAGE, false, false);
+
         case AddSemesterCommand.COMMAND_WORD:
             return new CommandResult(AddSemesterCommand.MESSAGE_USAGE, false, false);
+
         case ViewStudyPlanCommand.COMMAND_WORD:
             return new CommandResult(ViewStudyPlanCommand.MESSAGE_USAGE, false, false);
+
         case ExitCommand.COMMAND_WORD:
             return new CommandResult(ExitCommand.MESSAGE_USAGE, false, false);
+
         case "":
             return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
+
         default:
             throw new CommandException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
         }

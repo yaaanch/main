@@ -60,83 +60,122 @@ class HelpCommandParserTest {
     public void parse_helpWithCommand_success() throws ParseException {
         HelpCommand expectedHelpCommand = new HelpCommand(AddModuleCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(AddModuleCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(BlockCurrentSemesterCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(BlockCurrentSemesterCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(DeleteModuleCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(DeleteModuleCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(RedoCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(RedoCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(SetCurrentSemesterCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(SetCurrentSemesterCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(UnblockCurrentSemesterCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(UnblockCurrentSemesterCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(UndoCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(UndoCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(DeleteTagCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(DeleteTagCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(FindModuleCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(FindModuleCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(RemoveAllTagsCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(RemoveAllTagsCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(RemoveTagFromAllCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(RemoveTagFromAllCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(RemoveTagFromModuleCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(RemoveTagFromModuleCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(RemoveTagFromStudyPlanCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(RemoveTagFromStudyPlanCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(RenameTagCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(RenameTagCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(SortStudyPlansByPriorityTagCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(SortStudyPlansByPriorityTagCommand.COMMAND_WORD),
                 expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(TagModuleCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(TagModuleCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(TagStudyPlanCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(TagStudyPlanCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ViewAllTagsCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ViewAllTagsCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ViewDefaultTagsCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ViewDefaultTagsCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ViewModuleTagsCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ViewModuleTagsCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ViewTaggedCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ViewTaggedCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(HelpCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(HelpCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ActivateStudyPlanCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ActivateStudyPlanCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(AddSemesterCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(AddSemesterCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(CommitStudyPlanCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(CommitStudyPlanCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(CreateStudyPlanCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(CreateStudyPlanCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(DefaultStudyPlanCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(DefaultStudyPlanCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(DeleteCommitCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(DeleteCommitCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(DeleteSemesterCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(DeleteSemesterCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(DeleteStudyPlanCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(DeleteStudyPlanCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(EditTitleCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(EditTitleCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ListAllStudyPlansCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ListAllStudyPlansCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(RevertCommitCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(RevertCommitCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ViewCommitCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ViewCommitCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ViewCommitHistoryCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ViewCommitHistoryCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ViewStudyPlanCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ViewStudyPlanCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(CheckCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(CheckCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(DescriptionCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(DescriptionCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ValidModsCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ValidModsCommand.COMMAND_WORD), expectedHelpCommand);
+
         expectedHelpCommand = new HelpCommand(ExitCommand.COMMAND_WORD);
         assertEquals(new HelpCommandParser().parse(ExitCommand.COMMAND_WORD), expectedHelpCommand);
     }
