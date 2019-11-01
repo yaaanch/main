@@ -31,14 +31,19 @@ import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
 import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
+import seedu.address.logic.commands.storage.AddSemesterCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
+import seedu.address.logic.commands.storage.DefaultStudyPlanCommand;
 import seedu.address.logic.commands.storage.DeleteCommitCommand;
+import seedu.address.logic.commands.storage.DeleteSemesterCommand;
 import seedu.address.logic.commands.storage.DeleteStudyPlanCommand;
 import seedu.address.logic.commands.storage.EditTitleCommand;
 import seedu.address.logic.commands.storage.ListAllStudyPlansCommand;
 import seedu.address.logic.commands.storage.RevertCommitCommand;
+import seedu.address.logic.commands.storage.ViewCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
+import seedu.address.logic.commands.storage.ViewStudyPlanCommand;
 import seedu.address.logic.commands.verification.CheckCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
@@ -180,6 +185,11 @@ public class Autocomplete extends TextField {
         commandKeywords.add(ValidModsCommand.COMMAND_WORD);
         commandKeywords.add(DescriptionCommand.COMMAND_WORD);
         commandKeywords.add(CheckCommand.COMMAND_WORD);
+        commandKeywords.add(DeleteSemesterCommand.COMMAND_WORD);
+        commandKeywords.add(AddSemesterCommand.COMMAND_WORD);
+        commandKeywords.add(ViewCommitCommand.COMMAND_WORD);
+        commandKeywords.add(ViewStudyPlanCommand.COMMAND_WORD);
+        commandKeywords.add(DefaultStudyPlanCommand.COMMAND_WORD);
     }
 
     /**

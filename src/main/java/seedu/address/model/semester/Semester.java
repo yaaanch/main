@@ -89,6 +89,14 @@ public class Semester implements Cloneable {
         return this.modules.contains(module);
     }
 
+    public boolean isExpanded() {
+        return isExpanded;
+    }
+
+    public void setExpanded(boolean expanded) {
+        isExpanded = expanded;
+    }
+
     /**
      * Clears/deletes all modules this semester.
      */

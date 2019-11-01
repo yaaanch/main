@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.cli.AddModuleCommand;
 import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
@@ -27,6 +28,7 @@ import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
+import seedu.address.logic.commands.storage.AddSemesterCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
 import seedu.address.logic.commands.storage.DefaultStudyPlanCommand;
@@ -38,6 +40,7 @@ import seedu.address.logic.commands.storage.ListAllStudyPlansCommand;
 import seedu.address.logic.commands.storage.RevertCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
+import seedu.address.logic.commands.storage.ViewStudyPlanCommand;
 import seedu.address.logic.commands.verification.CheckCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
@@ -63,9 +66,11 @@ public class HelpCommand extends Command {
             + SetCurrentSemesterCommand.HELP_MESSAGE + "\n"
             + BlockCurrentSemesterCommand.HELP_MESSAGE + "\n"
             + UnblockCurrentSemesterCommand.HELP_MESSAGE + "\n"
+            + AddSemesterCommand.HELP_MESSAGE + "\n"
+            + DeleteSemesterCommand.HELP_MESSAGE + "\n"
             + "NOT YET: nameue - Naming a UE from a semester\n"
-            + "NOT YET: move - Moving a module from one semester to another\n"
             + "\nStudy plans and committing:\n"
+            + DefaultStudyPlanCommand.HELP_MESSAGE + "\n"
             + CreateStudyPlanCommand.HELP_MESSAGE + "\n"
             + DeleteStudyPlanCommand.HELP_MESSAGE + "\n"
             + CommitStudyPlanCommand.HELP_MESSAGE + "\n"
@@ -75,10 +80,8 @@ public class HelpCommand extends Command {
             + ActivateStudyPlanCommand.HELP_MESSAGE + "\n"
             + EditTitleCommand.HELP_MESSAGE + "\n"
             + ListAllStudyPlansCommand.HELP_MESSAGE + "\n"
-            + "NOT YET: viewcommit - Viewing a commit\n"
-            + "NOT YET: viewplan - Viewing another study plan\n"
-            + "NOT YET: remove - Deleting a semester from a study plan\n"
-            + "NOT YET: default - Setting default study plan\n"
+            + ViewCommitCommand.HELP_MESSAGE + "\n"
+            + ViewStudyPlanCommand.HELP_MESSAGE + "\n"
             + "\nTags:\n"
             + ViewAllTagsCommand.HELP_MESSAGE + "\n"
             + ViewDefaultTagsCommand.HELP_MESSAGE + "\n"
@@ -102,7 +105,9 @@ public class HelpCommand extends Command {
             + "NOT YET: collapse - Collapsing a semester\n"
             + "\nUndo/Redo:\n"
             + UndoCommand.HELP_MESSAGE + "\n"
-            + RedoCommand.HELP_MESSAGE;
+            + RedoCommand.HELP_MESSAGE + "\n"
+            + "\nExiting:\n"
+            + ExitCommand.HELP_MESSAGE;
     private final String commandName;
 
     public HelpCommand() {
@@ -124,6 +129,8 @@ public class HelpCommand extends Command {
             return new CommandResult(DeleteModuleCommand.MESSAGE_USAGE, false, false);
         case SetCurrentSemesterCommand.COMMAND_WORD:
             return new CommandResult(SetCurrentSemesterCommand.MESSAGE_USAGE, false, false);
+        case UnblockCurrentSemesterCommand.COMMAND_WORD:
+            return new CommandResult(UnblockCurrentSemesterCommand.MESSAGE_USAGE, false, false);
         case FindModuleCommand.COMMAND_WORD:
             return new CommandResult(FindModuleCommand.MESSAGE_USAGE, false, false);
         case DescriptionCommand.COMMAND_WORD:
@@ -188,6 +195,12 @@ public class HelpCommand extends Command {
             return new CommandResult(RemoveTagFromStudyPlanCommand.MESSAGE_USAGE, false, false);
         case SortStudyPlansByPriorityTagCommand.COMMAND_WORD:
             return new CommandResult(SortStudyPlansByPriorityTagCommand.MESSAGE_USAGE, false, false);
+        case AddSemesterCommand.COMMAND_WORD:
+            return new CommandResult(AddSemesterCommand.MESSAGE_USAGE, false, false);
+        case ViewStudyPlanCommand.COMMAND_WORD:
+            return new CommandResult(ViewStudyPlanCommand.MESSAGE_USAGE, false, false);
+        case ExitCommand.COMMAND_WORD:
+            return new CommandResult(ExitCommand.MESSAGE_USAGE, false, false);
         case "":
             return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
         default:

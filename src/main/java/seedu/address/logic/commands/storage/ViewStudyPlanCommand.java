@@ -19,6 +19,7 @@ import seedu.address.ui.ResultViewType;
 public class ViewStudyPlanCommand extends Command {
 
     public static final String COMMAND_WORD = "viewplan";
+    public static final String HELP_MESSAGE = COMMAND_WORD + ": Viewing another study plan";
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Views the simplified study plan identified by the index used in the displayed study plan list.\n"
             + "Parameters: PLAN_INDEX (must be a positive integer)\n";

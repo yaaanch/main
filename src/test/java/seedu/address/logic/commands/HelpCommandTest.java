@@ -11,6 +11,7 @@ import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
 import seedu.address.logic.commands.cli.RedoCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.UnblockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.UndoCommand;
 import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
 import seedu.address.logic.commands.datamanagement.FindModuleCommand;
@@ -29,6 +30,7 @@ import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
+import seedu.address.logic.commands.storage.AddSemesterCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanCommand;
 import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
 import seedu.address.logic.commands.storage.DefaultStudyPlanCommand;
@@ -40,6 +42,7 @@ import seedu.address.logic.commands.storage.ListAllStudyPlansCommand;
 import seedu.address.logic.commands.storage.RevertCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
+import seedu.address.logic.commands.storage.ViewStudyPlanCommand;
 import seedu.address.logic.commands.verification.CheckCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
@@ -73,6 +76,8 @@ public class HelpCommandTest {
         assertEquals(new HelpCommand(RedoCommand.COMMAND_WORD).execute(model), expectedCommandResult);
         expectedCommandResult = new CommandResult(SetCurrentSemesterCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(SetCurrentSemesterCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+        expectedCommandResult = new CommandResult(UnblockCurrentSemesterCommand.MESSAGE_USAGE, false, false);
+        assertEquals(new HelpCommand(UnblockCurrentSemesterCommand.COMMAND_WORD).execute(model), expectedCommandResult);
         expectedCommandResult = new CommandResult(UndoCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(UndoCommand.COMMAND_WORD).execute(model), expectedCommandResult);
         expectedCommandResult = new CommandResult(DeleteTagCommand.MESSAGE_USAGE, false, false);
@@ -108,6 +113,8 @@ public class HelpCommandTest {
         assertEquals(new HelpCommand(HelpCommand.COMMAND_WORD).execute(model), expectedCommandResult);
         expectedCommandResult = new CommandResult(ActivateStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ActivateStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+        expectedCommandResult = new CommandResult(AddSemesterCommand.MESSAGE_USAGE, false, false);
+        assertEquals(new HelpCommand(AddSemesterCommand.COMMAND_WORD).execute(model), expectedCommandResult);
         expectedCommandResult = new CommandResult(CommitStudyPlanCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(CommitStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
         expectedCommandResult = new CommandResult(CreateStudyPlanCommand.MESSAGE_USAGE, false, false);
@@ -130,12 +137,16 @@ public class HelpCommandTest {
         assertEquals(new HelpCommand(ViewCommitCommand.COMMAND_WORD).execute(model), expectedCommandResult);
         expectedCommandResult = new CommandResult(ViewCommitHistoryCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ViewCommitHistoryCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+        expectedCommandResult = new CommandResult(ViewStudyPlanCommand.MESSAGE_USAGE, false, false);
+        assertEquals(new HelpCommand(ViewStudyPlanCommand.COMMAND_WORD).execute(model), expectedCommandResult);
         expectedCommandResult = new CommandResult(CheckCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(CheckCommand.COMMAND_WORD).execute(model), expectedCommandResult);
         expectedCommandResult = new CommandResult(DescriptionCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(DescriptionCommand.COMMAND_WORD).execute(model), expectedCommandResult);
         expectedCommandResult = new CommandResult(ValidModsCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ValidModsCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+        expectedCommandResult = new CommandResult(ExitCommand.MESSAGE_USAGE, false, false);
+        assertEquals(new HelpCommand(ExitCommand.COMMAND_WORD).execute(model), expectedCommandResult);
     }
 
     @Test
