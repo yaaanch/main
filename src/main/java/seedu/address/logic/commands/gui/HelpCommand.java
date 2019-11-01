@@ -246,6 +246,12 @@ public class HelpCommand extends Command {
         case ExitCommand.COMMAND_WORD:
             return new CommandResult(ExitCommand.MESSAGE_USAGE, false, false);
 
+        case ExpandCommand.COMMAND_WORD:
+            return new CommandResult(ExpandCommand.MESSAGE_USAGE, false, false);
+
+        case CollapseCommand.COMMAND_WORD:
+            return new CommandResult(CollapseCommand.MESSAGE_USAGE, false, false);
+
         case "":
             return new CommandResult(SHOWING_HELP_MESSAGE, false, false);
 

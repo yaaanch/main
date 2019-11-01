@@ -28,6 +28,8 @@ import seedu.address.logic.commands.datamanagement.ViewDefaultTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.gui.CollapseCommand;
+import seedu.address.logic.commands.gui.ExpandCommand;
 import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.AddSemesterCommand;
@@ -188,6 +190,12 @@ public class HelpCommandTest {
 
         expectedCommandResult = new CommandResult(ExitCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ExitCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
+        expectedCommandResult = new CommandResult(ExpandCommand.MESSAGE_USAGE, false, false);
+        assertEquals(new HelpCommand(ExpandCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+
+        expectedCommandResult = new CommandResult(CollapseCommand.MESSAGE_USAGE, false, false);
+        assertEquals(new HelpCommand(CollapseCommand.COMMAND_WORD).execute(model), expectedCommandResult);
 
         expectedCommandResult = new CommandResult(ClearInvalidModsCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ClearInvalidModsCommand.COMMAND_WORD).execute(model), expectedCommandResult);

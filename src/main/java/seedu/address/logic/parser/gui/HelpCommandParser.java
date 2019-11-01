@@ -24,6 +24,8 @@ import seedu.address.logic.commands.datamanagement.ViewAllTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewDefaultTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
+import seedu.address.logic.commands.gui.CollapseCommand;
+import seedu.address.logic.commands.gui.ExpandCommand;
 import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.AddSemesterCommand;
@@ -104,6 +106,8 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         case ViewStudyPlanCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
         case ClearInvalidModsCommand.COMMAND_WORD:
+        case ExpandCommand.COMMAND_WORD:
+        case CollapseCommand.COMMAND_WORD:
             return new HelpCommand(commandName);
 
         default:
