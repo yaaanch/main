@@ -42,6 +42,7 @@ import seedu.address.logic.commands.storage.ViewCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
 import seedu.address.logic.commands.storage.ViewStudyPlanCommand;
 import seedu.address.logic.commands.verification.CheckCommand;
+import seedu.address.logic.commands.verification.ClearInvalidModsCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
 import seedu.address.model.Model;
@@ -100,6 +101,7 @@ public class HelpCommand extends Command {
             + ValidModsCommand.HELP_MESSAGE + "\n"
             + FindModuleCommand.HELP_MESSAGE + "\n"
             + CheckCommand.HELP_MESSAGE + "\n"
+            + ClearInvalidModsCommand.HELP_MESSAGE + "\n"
             + "\nGUI:\n"
             + ExpandCommand.HELP_MESSAGE + "\n"
             + CollapseCommand.HELP_MESSAGE + "\n"
@@ -231,6 +233,9 @@ public class HelpCommand extends Command {
 
         case SortStudyPlansByPriorityTagCommand.COMMAND_WORD:
             return new CommandResult(SortStudyPlansByPriorityTagCommand.MESSAGE_USAGE, false, false);
+
+        case ClearInvalidModsCommand.COMMAND_WORD:
+            return new CommandResult(ClearInvalidModsCommand.MESSAGE_USAGE, false, false);
 
         case AddSemesterCommand.COMMAND_WORD:
             return new CommandResult(AddSemesterCommand.MESSAGE_USAGE, false, false);

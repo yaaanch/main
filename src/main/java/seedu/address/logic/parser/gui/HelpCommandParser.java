@@ -40,6 +40,7 @@ import seedu.address.logic.commands.storage.ViewCommitCommand;
 import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
 import seedu.address.logic.commands.storage.ViewStudyPlanCommand;
 import seedu.address.logic.commands.verification.CheckCommand;
+import seedu.address.logic.commands.verification.ClearInvalidModsCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
 import seedu.address.logic.parser.Parser;
@@ -102,6 +103,7 @@ public class HelpCommandParser implements Parser<HelpCommand> {
         case AddSemesterCommand.COMMAND_WORD:
         case ViewStudyPlanCommand.COMMAND_WORD:
         case ExitCommand.COMMAND_WORD:
+        case ClearInvalidModsCommand.COMMAND_WORD:
             return new HelpCommand(commandName);
 
         default:
