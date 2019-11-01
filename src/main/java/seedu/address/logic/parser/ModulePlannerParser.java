@@ -29,7 +29,9 @@ import seedu.address.logic.commands.datamanagement.ViewAllTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewDefaultTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
+import seedu.address.logic.commands.gui.CollapseAllCommand;
 import seedu.address.logic.commands.gui.CollapseCommand;
+import seedu.address.logic.commands.gui.ExpandAllCommand;
 import seedu.address.logic.commands.gui.ExpandCommand;
 import seedu.address.logic.commands.gui.HelpCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
@@ -240,6 +242,12 @@ public class ModulePlannerParser {
 
         case CollapseCommand.COMMAND_WORD:
             return new CollapseCommandParser().parse(arguments);
+
+        case ExpandAllCommand.COMMAND_WORD:
+            return new ExpandAllCommand();
+
+        case CollapseAllCommand.COMMAND_WORD:
+            return new CollapseAllCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

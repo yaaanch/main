@@ -28,7 +28,7 @@ class ExpandCommandTest {
     @Test
     public void execute_semesterExpanded_collapseSuccessful()
             throws CommandException {
-        ExpandCommand collapseCommand = new ExpandCommand(SemesterName.Y2S1);
+        ExpandCommand expandCommand = new ExpandCommand(SemesterName.Y2S1);
 
         StudyPlan studyPlan = new StudyPlanBuilder().withSemesters(TypicalSemesterList.EMPTY_SEMESTER_LIST).build();
         Model model = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
@@ -44,7 +44,7 @@ class ExpandCommandTest {
         expectedModel.getSemester(SemesterName.Y2S1).setExpanded(true);
 
         // construct command to collapse semester
-        CommandResult res = collapseCommand.execute(model);
+        CommandResult res = expandCommand.execute(model);
         assertEquals(model.getSemester(SemesterName.Y2S1).isExpanded(),
                 expectedModel.getSemester(SemesterName.Y2S1).isExpanded());
         assertEquals(res.getFeedbackToUser(), String.format(ExpandCommand.MESSAGE_SUCCESS, "Y2S1"));

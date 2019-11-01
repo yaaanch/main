@@ -105,6 +105,8 @@ public class HelpCommand extends Command {
             + "\nGUI:\n"
             + ExpandCommand.HELP_MESSAGE + "\n"
             + CollapseCommand.HELP_MESSAGE + "\n"
+            + ExpandAllCommand.HELP_MESSAGE + "\n"
+            + CollapseAllCommand.HELP_MESSAGE + "\n"
             + "\nUndo/Redo:\n"
             + UndoCommand.HELP_MESSAGE + "\n"
             + RedoCommand.HELP_MESSAGE + "\n"
@@ -251,6 +253,12 @@ public class HelpCommand extends Command {
 
         case CollapseCommand.COMMAND_WORD:
             return new CommandResult(CollapseCommand.MESSAGE_USAGE, false, false);
+
+        case ExpandAllCommand.COMMAND_WORD:
+            return new CommandResult(ExpandAllCommand.MESSAGE_USAGE, false, false);
+
+        case CollapseAllCommand.COMMAND_WORD:
+            return new CommandResult(CollapseAllCommand.MESSAGE_USAGE, false, false);
 
         case "":
             return new CommandResult(SHOWING_HELP_MESSAGE, false, false);

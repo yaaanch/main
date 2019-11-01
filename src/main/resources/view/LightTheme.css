@@ -471,10 +471,18 @@
     -fx-background-radius: 10 10 10 10;
 }
 
+#semesterCardPane.currentSemester {
+    -fx-background-color: #c4c4c4
+}
+
 #currentSemesterCardPane {
     -fx-background-color: #A4A4A4;
     -fx-border-radius: 10 10 10 10;
     -fx-background-radius: 10 10 10 10;
+}
+
+.prereqsNotMet .label {
+    -fx-text-fill: #450700;
 }
 
 #blockedSemesterCardPane {
