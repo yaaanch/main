@@ -508,12 +508,12 @@
     -fx-text-fill: #010504;
 }
 
-.prereqsNotMet {
-    -fx-background-color: #ffbfba !important;
+#modulePill.prereqsNotMet {
+    -fx-background-color: #ffbfba;
 }
 
 .prereqsNotMet .label {
-    -fx-text-fill: #450700 !important;
+    -fx-text-fill: #450700;
 }
 
 #modulesCollapsedPlaceholder {
