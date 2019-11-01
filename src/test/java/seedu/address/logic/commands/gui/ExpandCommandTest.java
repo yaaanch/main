@@ -34,14 +34,14 @@ class ExpandCommandTest {
         Model model = new ModelManager(new ModulePlannerBuilder().withStudyPlan(studyPlan).build(),
                 new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
         model.activateFirstStudyPlan();
-        model.getSemester(SemesterName.Y2S1).setExpanded(true);
+        model.getSemester(SemesterName.Y2S1).setExpanded(false);
 
         StudyPlan expectedStudyPlan = new StudyPlanBuilder()
                 .withSemesters(TypicalSemesterList.EMPTY_SEMESTER_LIST).build();
         Model expectedModel = new ModelManager(new ModulePlannerBuilder().withStudyPlan(expectedStudyPlan).build(),
                 new UserPrefs(), TypicalModulesInfo.getTypicalModulesInfo());
         expectedModel.activateFirstStudyPlan();
-        expectedModel.getSemester(SemesterName.Y2S1).setExpanded(false);
+        expectedModel.getSemester(SemesterName.Y2S1).setExpanded(true);
 
         // construct command to collapse semester
         CommandResult res = collapseCommand.execute(model);
