@@ -19,9 +19,6 @@ public class ExpandAllCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "All semesters have been expanded.";
 
-    public ExpandAllCommand() {
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);

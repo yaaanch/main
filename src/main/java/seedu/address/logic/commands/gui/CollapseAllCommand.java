@@ -19,9 +19,6 @@ public class CollapseAllCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "All semesters have been collapsed.";
 
-    public CollapseAllCommand() {
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
