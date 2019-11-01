@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.FlowPane?>
 <HBox id="semesterCardPane" fx:id="semesterCardPane" xmlns="http://javafx.com/javafx/8"
       xmlns:fx="http://javafx.com/fxml/1">
     <GridPane HBox.hgrow="ALWAYS">
@@ -26,6 +27,7 @@
                 </padding>
                 <VBox fx:id="moduleListPanelPlaceholder" spacing="5" VBox.vgrow="ALWAYS"/>
             </VBox>
+            <FlowPane fx:id="modulesCollapsedPlaceholder"/>
         </VBox>
     </GridPane>
 </HBox>

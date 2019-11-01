@@ -42,6 +42,11 @@ public class SemesterCard extends UiPart<Region> {
     private FlowPane tags;
     @FXML
     private VBox moduleListPanelPlaceholder;
+    @FXML
+    private VBox moduleList;
+    @FXML
+    private FlowPane modulesCollapsedPlaceholder;
+
     private final Logger logger = LogsCenter.getLogger(getClass());
 
     public SemesterCard(Semester semester) {
@@ -51,11 +56,24 @@ public class SemesterCard extends UiPart<Region> {
         name.setText(semester.getSemesterName().name());
         totalMcCount.setText("(" + semester.getMcCount() + ")");
 
-        semester.getModules().asUnmodifiableObservableList().stream()
-                .sorted(Comparator.comparing(module -> module.getModuleCode().toString()))
-                .forEach(module -> {
-                    ModuleCard moduleCard = new ModuleCard(module);
-                    moduleListPanelPlaceholder.getChildren().add(moduleCard.getRoot());
-                });
+        if (semester.isExpanded()) {
+            modulesCollapsedPlaceholder.setVisible(false);
+            modulesCollapsedPlaceholder.setManaged(false);
+            semester.getModules().asUnmodifiableObservableList().stream()
+                    .sorted(Comparator.comparing(module -> module.getModuleCode().toString()))
+                    .forEach(module -> {
+                        ModuleCard moduleCard = new ModuleCard(module);
+                        moduleListPanelPlaceholder.getChildren().add(moduleCard.getRoot());
+                    });
+        } else {
+            moduleList.setVisible(false);
+            moduleList.setManaged(false);
+            semester.getModules().asUnmodifiableObservableList().stream()
+                    .sorted(Comparator.comparing(module -> module.getModuleCode().toString()))
+                    .forEach(module -> {
+                        ModulePill modulePill = new ModulePill(module);
+                        modulesCollapsedPlaceholder.getChildren().add(modulePill.getRoot());
+                    });
+        }
     }
 }
