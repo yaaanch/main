@@ -20,7 +20,6 @@ import seedu.address.model.ReadOnlyModulePlanner;
 public class AutocompleteTextField extends TextField {
     public static final int MAX_ENTRIES = 10;
     private ContextMenu keywordMenu;
-    private ReadOnlyModulePlanner modulePlanner;
     private ModulePlannerAutocompleteSearch autocompleteSearch;
 
     /**
@@ -29,7 +28,6 @@ public class AutocompleteTextField extends TextField {
     public AutocompleteTextField(ReadOnlyModulePlanner modulePlanner) {
         super();
         requireNonNull(modulePlanner);
-        this.modulePlanner = modulePlanner;
         this.autocompleteSearch = new ModulePlannerAutocompleteSearch(modulePlanner);
         keywordMenu = new ContextMenu();
         focusedProperty().addListener((unused0, unused1, unused2) -> keywordMenu.hide());
