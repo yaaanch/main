@@ -72,6 +72,7 @@ public class AutocompleteTextField extends TextField {
                 }
                 keywordMenu.getSkin().getNode().lookup(".menu-item").requestFocus();
             } else {
+                // If there are no autocomplete results, do nothing.
                 keywordMenu.hide();
             }
         }
@@ -84,14 +85,17 @@ public class AutocompleteTextField extends TextField {
         autocompleteSearch.handleChangeOfActiveStudyPlan();
     }
 
-    private void setAutocompleteText(String s) {
+    /**
+     * Sets the text in the text field.
+     */
+    private void setAutocompleteText(String searchResult) {
         int lastIndex = getText().lastIndexOf(" ");
         String finalText;
         if (lastIndex < 0) {
-            finalText = s;
+            finalText = searchResult;
         } else {
             finalText = getText().substring(0, lastIndex)
-                    + " " + s;
+                    + " " + searchResult;
         }
         setText(finalText);
         positionCaret(finalText.length());

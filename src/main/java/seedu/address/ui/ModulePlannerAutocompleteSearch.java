@@ -1,11 +1,51 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
 import javafx.collections.ListChangeListener;
-import javafx.scene.control.ContextMenu;
-import seedu.address.logic.commands.cli.*;
-import seedu.address.logic.commands.datamanagement.*;
-import seedu.address.logic.commands.gui.*;
-import seedu.address.logic.commands.storage.*;
+import seedu.address.logic.commands.cli.AddModuleCommand;
+import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.DeleteModuleCommand;
+import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.UnblockCurrentSemesterCommand;
+import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
+import seedu.address.logic.commands.datamanagement.FindModuleCommand;
+import seedu.address.logic.commands.datamanagement.RemoveTagFromAllCommand;
+import seedu.address.logic.commands.datamanagement.RemoveTagFromModuleCommand;
+import seedu.address.logic.commands.datamanagement.RemoveTagFromStudyPlanCommand;
+import seedu.address.logic.commands.datamanagement.RenameTagCommand;
+import seedu.address.logic.commands.datamanagement.SortStudyPlansByPriorityTagCommand;
+import seedu.address.logic.commands.datamanagement.TagModuleCommand;
+import seedu.address.logic.commands.datamanagement.TagStudyPlanCommand;
+import seedu.address.logic.commands.datamanagement.ViewAllTagsCommand;
+import seedu.address.logic.commands.datamanagement.ViewDefaultTagsCommand;
+import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
+import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
+import seedu.address.logic.commands.gui.CollapseAllCommand;
+import seedu.address.logic.commands.gui.CollapseCommand;
+import seedu.address.logic.commands.gui.ExpandAllCommand;
+import seedu.address.logic.commands.gui.ExpandCommand;
+import seedu.address.logic.commands.gui.HelpCommand;
+import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
+import seedu.address.logic.commands.storage.AddSemesterCommand;
+import seedu.address.logic.commands.storage.CommitStudyPlanCommand;
+import seedu.address.logic.commands.storage.CreateStudyPlanCommand;
+import seedu.address.logic.commands.storage.DefaultStudyPlanCommand;
+import seedu.address.logic.commands.storage.DeleteCommitCommand;
+import seedu.address.logic.commands.storage.DeleteSemesterCommand;
+import seedu.address.logic.commands.storage.DeleteStudyPlanCommand;
+import seedu.address.logic.commands.storage.EditTitleCommand;
+import seedu.address.logic.commands.storage.ListAllStudyPlansCommand;
+import seedu.address.logic.commands.storage.RevertCommitCommand;
+import seedu.address.logic.commands.storage.ViewCommitCommand;
+import seedu.address.logic.commands.storage.ViewCommitHistoryCommand;
+import seedu.address.logic.commands.storage.ViewStudyPlanCommand;
 import seedu.address.logic.commands.verification.CheckCommand;
 import seedu.address.logic.commands.verification.ClearInvalidModsCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
@@ -13,14 +53,6 @@ import seedu.address.logic.commands.verification.ValidModsCommand;
 import seedu.address.model.ReadOnlyModulePlanner;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 /**
  * Handles autocompletion searching.
@@ -113,8 +145,17 @@ public class ModulePlannerAutocompleteSearch {
         generateArgumentKeywords();
     }
 
+    /**
+     * Gets a list of search results based on an input, according to the Module Planner implementation.
+     * @param input User input.
+     * @return A list of search results.
+     */
     public List<String> getSearchResults(String input) {
         requireNonNull(input);
+        // Splits the input into an array including the delimiter " ".
+        // Example:
+        // "addmod CS1101S CS2030 " becomes ["addmod", " ", "CS1101S", " ", "CS2030", " "]
+        // This avoids situations where the user tries to autocomplete on a space.
         String[] inputArray = input.split(String.format(WITH_DELIMITER, " "));
         if (inputArray.length == 1) {
             return performSearch(inputArray[0], commandKeywords);
@@ -126,6 +167,12 @@ public class ModulePlannerAutocompleteSearch {
         }
     }
 
+    /**
+     * Performs a search based on the input.
+     * @param input One user input word.
+     * @param keywords Set of keywords to do searching on.
+     * @return A list of matching keywords.
+     */
     private List<String> performSearch(String input, SortedSet<String> keywords) {
         requireAllNonNull(input, keywords);
         List<String> searchResults = new ArrayList<>(keywords.subSet(input,
