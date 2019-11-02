@@ -52,6 +52,7 @@ import seedu.address.logic.commands.verification.ClearInvalidModsCommand;
 import seedu.address.logic.commands.verification.DescriptionCommand;
 import seedu.address.logic.commands.verification.ValidModsCommand;
 import seedu.address.model.ModulePlanner;
+import seedu.address.model.semester.SemesterName;
 import seedu.address.model.studyplan.StudyPlan;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UserTag;
@@ -59,6 +60,7 @@ import seedu.address.testutil.ModulePlannerBuilder;
 import seedu.address.testutil.StudyPlanBuilder;
 import seedu.address.testutil.TagBuilder;
 import seedu.address.testutil.TypicalModule;
+import seedu.address.testutil.TypicalStudyPlans;
 
 class ModulePlannerAutocompleteSearchTest {
     private static final String NON_EXISTENT_COMMAND_WORD = "abcdefgh";
@@ -266,5 +268,20 @@ class ModulePlannerAutocompleteSearchTest {
 
         searchResults = autocompleteSearch.getSearchResults("test test " + validTagNameOne);
         assertEquals(validTagNameOne, searchResults.get(0));
+    }
+
+    @Test
+    void getSearchResults_semester_success() {
+        StudyPlan studyPlan = TypicalStudyPlans.SP_1;
+        ModulePlanner modulePlanner = new ModulePlannerBuilder().withStudyPlan(studyPlan).build();
+        modulePlanner.activateFirstStudyPlan();
+
+        ModulePlannerAutocompleteSearch autocompleteSearch =
+                new ModulePlannerAutocompleteSearch(modulePlanner);
+        List<String> searchResults = autocompleteSearch.getSearchResults(" " + SemesterName.Y1S1.name());
+        assertEquals(SemesterName.Y1S1.name(), searchResults.get(0));
+
+        searchResults = autocompleteSearch.getSearchResults("test test " + SemesterName.Y1S1.name());
+        assertEquals(SemesterName.Y1S1.name(), searchResults.get(0));
     }
 }

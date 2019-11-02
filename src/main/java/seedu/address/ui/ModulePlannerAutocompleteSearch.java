@@ -142,6 +142,7 @@ public class ModulePlannerAutocompleteSearch {
             argumentKeywords.addAll(tags.asListOfStrings());
         }
         argumentKeywords.addAll(modulePlanner.getModuleCodes());
+        argumentKeywords.addAll(modulePlanner.getActiveStudyPlan().getListOfSemesterNames());
     }
 
     /**
