@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import seedu.address.model.ReadOnlyModulePlanner;
+
 
 /**
  * A text field that can handle autocompletion.
@@ -25,6 +28,7 @@ public class AutocompleteTextField extends TextField {
      */
     public AutocompleteTextField(ReadOnlyModulePlanner modulePlanner) {
         super();
+        requireNonNull(modulePlanner);
         this.modulePlanner = modulePlanner;
         this.autocompleteSearch = new ModulePlannerAutocompleteSearch(modulePlanner);
         keywordMenu = new ContextMenu();
@@ -63,6 +67,7 @@ public class AutocompleteTextField extends TextField {
         } else {
             String input = getText();
             List<String> searchResults = autocompleteSearch.getSearchResults(input);
+            requireNonNull(searchResults);
             if (searchResults.size() == 1) {
                 setAutocompleteText(searchResults.get(0));
             } else if (searchResults.size() > 1) {

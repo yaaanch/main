@@ -9,13 +9,17 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import javafx.collections.ListChangeListener;
+import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.cli.AddModuleCommand;
 import seedu.address.logic.commands.cli.BlockCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.DeleteModuleCommand;
+import seedu.address.logic.commands.cli.RedoCommand;
 import seedu.address.logic.commands.cli.SetCurrentSemesterCommand;
 import seedu.address.logic.commands.cli.UnblockCurrentSemesterCommand;
+import seedu.address.logic.commands.cli.UndoCommand;
 import seedu.address.logic.commands.datamanagement.DeleteTagCommand;
 import seedu.address.logic.commands.datamanagement.FindModuleCommand;
+import seedu.address.logic.commands.datamanagement.RemoveAllTagsCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromAllCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromModuleCommand;
 import seedu.address.logic.commands.datamanagement.RemoveTagFromStudyPlanCommand;
@@ -68,6 +72,7 @@ public class ModulePlannerAutocompleteSearch {
 
     public ModulePlannerAutocompleteSearch(ReadOnlyModulePlanner modulePlanner) {
         super();
+        requireNonNull(modulePlanner);
         this.modulePlanner = modulePlanner;
         tags = modulePlanner.getActiveTags();
         tags.asUnmodifiableObservableList().addListener((ListChangeListener<Tag>) change
@@ -122,6 +127,10 @@ public class ModulePlannerAutocompleteSearch {
         commandKeywords.add(ExpandCommand.COMMAND_WORD);
         commandKeywords.add(CollapseAllCommand.COMMAND_WORD);
         commandKeywords.add(ExpandAllCommand.COMMAND_WORD);
+        commandKeywords.add(UndoCommand.COMMAND_WORD);
+        commandKeywords.add(RedoCommand.COMMAND_WORD);
+        commandKeywords.add(RemoveAllTagsCommand.COMMAND_WORD);
+        commandKeywords.add(ExitCommand.COMMAND_WORD);
     }
 
     /**
