@@ -236,7 +236,7 @@
 }
 
 #commandTextField .menu-item:focused{
-    -fx-background-color: #101010;
+    -fx-background-color: #282828;
     -fx-background-insets: 0;
 }
 
