@@ -6,8 +6,8 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.commons.core.GuiTheme;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.core.GuiTheme;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
