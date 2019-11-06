@@ -41,7 +41,7 @@ public class CollapseCommandParser implements Parser<CollapseCommand> {
         if (!arePatternsPresent(argMultimap, SEMESTER_PATTERN)
                 || argMultimap.getNumberOfArgsForPattern(SEMESTER_PATTERN) != 1) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    ExpandCommand.MESSAGE_USAGE));
+                    CollapseCommand.MESSAGE_USAGE));
         }
         SemesterName semesterName = ParserUtil.parseSemester(argMultimap.getValue(SEMESTER_PATTERN).get());
 
