@@ -44,7 +44,7 @@ public class CollapseCommandParser implements Parser<CollapseCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     CollapseCommand.MESSAGE_USAGE));
         }
-        SemesterName semesterName = ParserUtil.parseSemester(args);
+        SemesterName semesterName = ParserUtil.parseSemester(argMultimap.getValue(SEMESTER_PATTERN).get());
 
         return new CollapseCommand(semesterName);
     }

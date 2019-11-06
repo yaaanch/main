@@ -69,7 +69,6 @@ public class HelpCommand extends Command {
             + UnblockCurrentSemesterCommand.HELP_MESSAGE + "\n"
             + AddSemesterCommand.HELP_MESSAGE + "\n"
             + DeleteSemesterCommand.HELP_MESSAGE + "\n"
-            + "NOT YET: nameue - Naming a UE from a semester\n"
             + "\nStudy plans and committing:\n"
             + DefaultStudyPlanCommand.HELP_MESSAGE + "\n"
             + CreateStudyPlanCommand.HELP_MESSAGE + "\n"
