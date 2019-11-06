@@ -5,7 +5,7 @@ package seedu.address.commons.core;
  */
 public enum GuiMode {
     LIGHT("light", "view/LightMode.css"),
-    DARK("dark", "view/DarkTheme.css");
+    DARK("dark", "view/DarkMode.css");
 
     public static final String MESSAGE_CONSTRAINTS = "This mode is not valid";
 
