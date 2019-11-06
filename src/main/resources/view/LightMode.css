@@ -143,7 +143,7 @@
 }
 
 .result-display .label {
-    -fx-text-fill: black !important;
+    -fx-text-fill: black
 }
 
 .status-bar .label {
@@ -490,7 +490,7 @@
 }
 
 #tagListView {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
 }
 
 #tagCardPane {

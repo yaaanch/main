@@ -71,7 +71,7 @@
 }
 
 .result-display .label {
-    -fx-text-fill: white !important;
+    -fx-text-fill: white
 }
 
 .grid-pane {
@@ -104,11 +104,11 @@
 }
 
 .scroll-bar {
-    -fx-background-color: derive(#101010, 20%);
+    -fx-background-color: #101010;
 }
 
 .scroll-bar .thumb {
-    -fx-background-color: derive(#101010, 50%);
+    -fx-background-color: #101010;
     -fx-background-insets: 3;
 }
 
@@ -170,7 +170,7 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color : #101010;
+    -fx-background-color : #3e3e3e;
     -fx-background-insets : 2.0, 0.0, 0.0;
     -fx-background-radius : 2.0em;
 }
@@ -315,7 +315,7 @@
 }
 
 #tagListView {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
 }
 
 #tagCardPane {
