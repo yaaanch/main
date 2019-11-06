@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import seedu.address.commons.core.GuiMode;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.Logic;
@@ -243,11 +242,17 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Sets the initialised GUI mode based on {@code guiSettings}.
+     */
     private void initialiseMode(GuiSettings guiSettings) {
         ObservableList<String> styles = primaryStage.getScene().getStylesheets();
         styles.add(guiSettings.getMode().getCssString());
     }
 
+    /**
+     * Changes the current GUI mode based on {@code guiSettings}.
+     */
     private void changeMode(GuiSettings guiSettings) {
         ObservableList<String> styles = primaryStage.getScene().getStylesheets();
         styles.remove(styles.size() - 1);

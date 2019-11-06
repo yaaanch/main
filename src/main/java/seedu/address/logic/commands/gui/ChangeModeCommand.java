@@ -1,16 +1,16 @@
 package seedu.address.logic.commands.gui;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.core.GuiMode;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Changes the mode, or thematic style, of the GUI.

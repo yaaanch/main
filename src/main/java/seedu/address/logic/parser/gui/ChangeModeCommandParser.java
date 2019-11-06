@@ -1,22 +1,17 @@
 package seedu.address.logic.parser.gui;
 
-import seedu.address.commons.core.GuiMode;
-import seedu.address.logic.commands.gui.ChangeModeCommand;
-import seedu.address.logic.commands.gui.CollapseCommand;
-import seedu.address.logic.commands.gui.ExpandCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.semester.SemesterName;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.GUI_MODE_PATTERN;
 
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.GUI_MODE_PATTERN;
-import static seedu.address.logic.parser.CliSyntax.SEMESTER_PATTERN;
+import seedu.address.commons.core.GuiMode;
+import seedu.address.logic.commands.gui.ChangeModeCommand;
+import seedu.address.logic.parser.ArgumentMultimap;
+import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses input arguments and creates a new ChangeModeCommand object

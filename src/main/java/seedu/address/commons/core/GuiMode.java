@@ -1,5 +1,8 @@
 package seedu.address.commons.core;
 
+/**
+ * GuiMode is an enumeration for different GUI themes, such as light or dark.
+ */
 public enum GuiMode {
     LIGHT("light", "view/LightMode.css"),
     DARK("dark", "view/DarkTheme.css");
