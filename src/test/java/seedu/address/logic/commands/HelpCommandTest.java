@@ -28,12 +28,8 @@ import seedu.address.logic.commands.datamanagement.ViewDefaultTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewModuleTagsCommand;
 import seedu.address.logic.commands.datamanagement.ViewTaggedCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.gui.ChangeModeCommand;
-import seedu.address.logic.commands.gui.CollapseAllCommand;
-import seedu.address.logic.commands.gui.CollapseCommand;
-import seedu.address.logic.commands.gui.ExpandAllCommand;
-import seedu.address.logic.commands.gui.ExpandCommand;
-import seedu.address.logic.commands.gui.HelpCommand;
+import seedu.address.logic.commands.gui.*;
+import seedu.address.logic.commands.gui.ChangeThemeCommand;
 import seedu.address.logic.commands.storage.ActivateStudyPlanCommand;
 import seedu.address.logic.commands.storage.AddSemesterCommand;
 import seedu.address.logic.commands.storage.CommitStudyPlanCommand;
@@ -206,8 +202,8 @@ public class HelpCommandTest {
         expectedCommandResult = new CommandResult(CollapseAllCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(CollapseAllCommand.COMMAND_WORD).execute(model), expectedCommandResult);
 
-        expectedCommandResult = new CommandResult(ChangeModeCommand.MESSAGE_USAGE, false, false);
-        assertEquals(new HelpCommand(ChangeModeCommand.COMMAND_WORD).execute(model), expectedCommandResult);
+        expectedCommandResult = new CommandResult(ChangeThemeCommand.MESSAGE_USAGE, false, false);
+        assertEquals(new HelpCommand(ChangeThemeCommand.COMMAND_WORD).execute(model), expectedCommandResult);
 
         expectedCommandResult = new CommandResult(ClearInvalidModsCommand.MESSAGE_USAGE, false, false);
         assertEquals(new HelpCommand(ClearInvalidModsCommand.COMMAND_WORD).execute(model), expectedCommandResult);
