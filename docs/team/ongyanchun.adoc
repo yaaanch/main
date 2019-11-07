@@ -1,4 +1,4 @@
-= Ong Yan Chun - Project Portfolio
+= Ong Yan Chun (yaaanch)- Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -67,9 +67,12 @@ It is interlinked with existing commands and commands to be added in future. It 
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
+include::../UserGuide.adoc[tag=help]
 include::../UserGuide.adoc[tag=autocomplete]
+include::../UserGuide.adoc[tag=gui]
+== Upcoming Features [coming in v2.0]
+include::../UserGuide.adoc[tag=guifuture]
 
-include::../UserGuide.adoc
 
 == Contributions to the Developer Guide
 
@@ -77,11 +80,6 @@ include::../UserGuide.adoc
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=Ui]
+include::../DeveloperGuide.adoc[tag=autocomplete]
 
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
