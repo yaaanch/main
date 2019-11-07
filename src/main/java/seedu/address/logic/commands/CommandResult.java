@@ -21,7 +21,7 @@ public class CommandResult<T> {
      */
     private final boolean exit;
 
-    private ResultViewType resultViewType = null;
+    private ResultViewType resultViewType = ResultViewType.TEXT;
 
     private ObservableList<T> resultContent = null;
 
