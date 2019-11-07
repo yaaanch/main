@@ -53,6 +53,8 @@ or as `newplan Algo and Graphics`.
 
 === Basic
 
+//tag::help[]
+
 ==== General Help: `help`
 Provides a list of possible commands the user can type. +
 Format: `help`
@@ -64,12 +66,18 @@ Example:
 
 * `help newplan`
 
+//end::help[]
+
+//tag::autocomplete[]
+
 ==== Autocompleting: `tab`
 When the user presses `tab`, the command word, or module code, or semester,
 or tag name will be autocompleted
 If there is only one possible completion, it will be filled immediately.
 If there is more than one possible completion, a menu of possible autocompletions
 is drawn that can be selected with the up and down buttons.
+
+//end::autocomplete[]
 
 ==== Undo-ing the previous command: `undo`
 Undo the previous command. The state of the application will revert back to that before the previous command. This command cannot undo itself. +
@@ -92,8 +100,6 @@ Examples:
 
 * `addmod y1s1 CS1101s`
 * `addmod y2s2 CS3244 CS3245 CS3233`
-* `addmod y1s1 ue`
-* `addmod y1s2 ue:GER1000`
 
 ==== Removing a module from a given semester. `removemod`
 Removes the specified module to a given semester of the current study plan. +
