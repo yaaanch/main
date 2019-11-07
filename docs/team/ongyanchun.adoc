@@ -7,19 +7,19 @@
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 ifdef::env-github[]
-image::../docs/images/title.png[width="600"]
+image::title.png[width="600"]
 endif::[]
 
 ifndef::env-github[]
-image::../images/title.png[width="600"]
+image::title.png[width="600"]
 endif::[]
 
 ifdef::env-github[]
-image::../docs/images/Ui.png[width="600"]
+image::Ui.png[width="600"]
 endif::[]
 
 ifndef::env-github[]
-image::../images/Ui.png[width="600"]
+image::Ui.png[width="600"]
 endif::[]
 == Overview
 
@@ -68,9 +68,13 @@ It is interlinked with existing commands and commands to be added in future. It 
 |===
 
 include::../UserGuide.adoc[tag=help]
+
 include::../UserGuide.adoc[tag=autocomplete]
+
 include::../UserGuide.adoc[tag=gui]
+
 == Upcoming Features [coming in v2.0]
+
 include::../UserGuide.adoc[tag=guifuture]
 
 
@@ -81,5 +85,6 @@ include::../UserGuide.adoc[tag=guifuture]
 |===
 
 include::../DeveloperGuide.adoc[tag=Ui]
+
 include::../DeveloperGuide.adoc[tag=autocomplete]
 
