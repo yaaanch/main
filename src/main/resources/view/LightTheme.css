@@ -90,7 +90,7 @@
 .list-view {
     -fx-background-insets: 0;
     -fx-padding: 0;
-    -fx-background-color: derive(#c4c4c4, 20%);
+    -fx-background-color: transparent;
 }
 
 .list-cell {
@@ -527,7 +527,7 @@
 }
 
 #moduleListView {
-    -fx-background-color: white;
+    -fx-background-color: transparent;
 }
 
 #simpleModuleCardPane {
