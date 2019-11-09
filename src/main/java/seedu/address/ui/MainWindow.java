@@ -40,25 +40,18 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private Label studyPlanId;
-
     @FXML
     private Label title;
-
     @FXML
     private Label mcCount;
-
     @FXML
     private StackPane commandBoxPlaceholder;
-
     @FXML
     private StackPane semesterListPanelPlaceholder;
-
     @FXML
     private StackPane resultDisplayPlaceholder;
-
     @FXML
     private StackPane statusbarPlaceholder;
-
     @FXML
     private StackPane studyPlanTagsPlaceholder;
 
@@ -182,11 +175,9 @@ public class MainWindow extends UiPart<Stage> {
                     commandBox.handleChangeOfActiveStudyPlan();
                 }
             }
-
             if (commandResult.isExit()) {
                 handleExit();
             }
-
             ResultViewType resultViewType = commandResult.getResultViewType();
             if (resultViewType != null) {
                 resultDisplay.handleResult(resultViewType, commandResult.getResultContent());
