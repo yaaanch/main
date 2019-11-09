@@ -349,8 +349,10 @@
     -fx-background-radius : 2.0em;
 }
 
-#resultView {
-    -fx-background-color: transparent;
+.resultView {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10 10 10 10;
+    -fx-background-radius: 10 10 10 10;
 }
 
 #defaultTag {
@@ -406,7 +408,8 @@
 }
 
 #resultDisplay {
-    -fx-background-color: transparent;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 15;
 }
 
 #filterField, #personListPanel, #personWebpage {
@@ -426,7 +429,7 @@
 }
 
 #resultHolder {
-    -fx-background-color: white;
+    -fx-background-color: #ffffff;
     -fx-background-radius: 15;
 }
 
@@ -571,18 +574,3 @@
     -fx-opacity: 0.9;
 }
 
-.scroll-pane > .viewport {
-    -fx-background-color: transparent;
-}
-
-.scroll-pane {
-    -fx-background-color: transparent;
-}
-
-.scroll-pane > .viewport {
-    -fx-background-color: transparent;
-}
-
-.scroll-pane {
-    -fx-background-color: transparent;
-}

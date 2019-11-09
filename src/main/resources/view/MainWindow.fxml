@@ -35,12 +35,11 @@
                         <ColumnConstraints hgrow="SOMETIMES" percentWidth="45.0" />
                         <ColumnConstraints hgrow="SOMETIMES" percentWidth="55.0" />
                     </columnConstraints>
-                    <VBox styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.vgrow="ALWAYS" GridPane.hgrow="ALWAYS">
+                    <StackPane fx:id="resultDisplayPlaceholder" minHeight="100" styleClass="pane-with-border" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
                         <padding>
                             <Insets bottom="5" left="5" top="5" />
                         </padding>
-                        <StackPane fx:id="resultDisplayPlaceholder" VBox.vgrow="ALWAYS" />
-                    </VBox>
+                    </StackPane>
                     <VBox GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                         <padding>
                             <Insets bottom="5" left="5" right="5" top="5" />

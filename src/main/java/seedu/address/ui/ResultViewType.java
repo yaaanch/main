@@ -7,5 +7,6 @@ public enum ResultViewType {
     TEXT,
     TAG,
     MODULE,
-    SEMESTER
+    SEMESTER,
+    COMMIT_HISTORY,
 }
