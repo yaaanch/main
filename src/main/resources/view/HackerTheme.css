@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Inconsolata';
+    src: url('../font/Inconsolata-Regular.ttf');
+}
+
 .background {
     -fx-background-color: black;
     background-color: #101010; /* Used in the default.html file */
@@ -5,14 +10,14 @@
 
 .label {
     -fx-font-size: 12pt;
-    -fx-font-family: "Courier New";
+    -fx-font-family: "Inconsolata";
     -fx-text-fill: #555555;
     -fx-opacity: 0.9;
 }
 
 .text-field {
     -fx-font-size: 12pt;
-    -fx-font-family: "Courier New";
+    -fx-font-family: "Inconsolata";
 }
 
 .tab-pane {
@@ -52,20 +57,20 @@
 }
 
 .cell_big_label {
-    -fx-font-family: "Courier New";
+    -fx-font-family: "Inconsolata";
     -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
 
 .cell_small_label {
-    -fx-font-family: "Courier New";
+    -fx-font-family: "Inconsolata";
     -fx-font-size:  12pt;
     -fx-text-fill: white;
 }
 
 .result-display {
     -fx-background-color: transparent;
-    -fx-font-family: "Courier New";
+    -fx-font-family: "Inconsolata";
     -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
@@ -106,7 +111,7 @@
 .scroll-bar:horizontal .track,
 .scroll-bar:vertical .track{
     -fx-background-color : black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
 }
 
 .scroll-bar:horizontal .increment-button ,
@@ -139,7 +144,7 @@
 
 .scroll-bar:horizontal .thumb,
 .scroll-bar:vertical .thumb {
-    -fx-background-color : #11aa07;
+    -fx-background-color : #8ac0a6;
     -fx-background-radius: 0;
     -fx-background-insets : 2.0, 0.0, 0.0;
 }
@@ -160,7 +165,7 @@
 }
 
 #userTag {
-    -fx-text-fill: #11aa07;
+    -fx-text-fill: #8ac0a6;
     -fx-background-color: black;
 }
 
@@ -177,23 +182,23 @@
 
 #commandTextField {
     -fx-background-color: black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
     -fx-border-width: 1;
     -fx-background-insets: 0;
-    -fx-font-family: "Courier New";
+    -fx-font-family: "Inconsolata";
     -fx-font-size:  12pt;
-    -fx-text-fill: #11aa07;
+    -fx-text-fill: #8ac0a6;
 }
 
 #commandTextField .label{
-    -fx-font-family: "Courier New";
+    -fx-font-family: "Inconsolata";
     -fx-font-size:  12pt;
     -fx-text-fill: white;
 }
 
 #commandTextField .context-menu {
     -fx-background-color: black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
     -fx-border-width: 1;
     -fx-background-insets: 0;
     -fx-padding: 0;
@@ -201,13 +206,13 @@
 
 #commandTextField .menu-item {
     -fx-background-color: black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
     -fx-border-width: 0.5;
     -fx-background-insets: 0;
 }
 
 #commandTextField .menu-item:focused{
-    -fx-background-color: #11aa07;
+    -fx-background-color: #8ac0a6;
     -fx-background-insets: 0;
 }
 
@@ -229,7 +234,7 @@
 
 #resultHolder {
     -fx-background-color: black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
     -fx-border-width: 1;
 }
 
@@ -265,18 +270,18 @@
 
 #semesterCardPane {
     -fx-background-color: black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
     -fx-border-width: 1;
 }
 
 #semesterCardPane.currentSemester {
     -fx-background-color: black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
     -fx-border-width: 4;
 }
 
 #blockedSemesterCardPane {
-    -fx-background-color: #11aa07;
+    -fx-background-color: #8ac0a6;
 }
 
 #tagListView {
@@ -285,13 +290,13 @@
 
 #moduleCardPane {
     -fx-background-color: black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
     -fx-border-width: 1;
 }
 
 #modulePill {
     -fx-background-color: black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
     -fx-border-width: 1;
 }
 
@@ -316,18 +321,18 @@
 
 #simpleModuleCardPane {
     -fx-background-color: black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
     -fx-border-width: 1;
 }
 
 #studyPlan {
     -fx-background-color: black;
-    -fx-border-color: #11aa07;
+    -fx-border-color: #8ac0a6;
     -fx-border-width: 1;
 }
 
 #title {
-    -fx-font-family: "Courier New";
+    -fx-font-family: "Inconsolata";
     -fx-font-size: 12pt;
 }
 
