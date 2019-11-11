@@ -118,7 +118,7 @@ link:{repoURL}/blob/master/src/main/java/seedu/address/logic/Logic.java[`Logic.j
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="350"]
+image::ModelClassDiagram.png[]
 
 *API* : link:{repoURL}/blob/master/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -399,7 +399,7 @@ to study plan tagging, i.e. allowing study plans to have other kinds of tags.
 - `UniqueTagList#getTag(String tagName)` -- Returns the `Tag` with the given `tagName`.
 
 .Class diagram for the tag model
-image::TagClassDiagram.png[width="170"]
+image::TagClassDiagram.png[width="250"]
 
 There are many operations that can be done in relation to tagging modules. Some examples are _adding_, _deleting_,
 and _renaming_ tags. Given below is an example usage scenario of the `UniqueTagList#addTag(Tag toAdd)` operation and how the module tagging
@@ -458,12 +458,7 @@ image::TagModuleCommandSequenceDiagram1.png[]
 image::TagModuleCommandSequenceDiagram2.png[]
 
 .Activity diagram for module tagging
-image::TagModuleCommandActivityDiagram.png[width="270"]
-
-[NOTE]
-The command exceptions in the above activity diagram should actually point to a single _stop_ at the end.
-There are multiple _stops_ in the above diagram as PlantUML does not support having a single _stop_ and []
-for branch labels in one syntax.
+image::TagModuleCommandActivityDiagram.png[width="350"]
 
 [NOTE]
 The command exceptions in the above activity diagram should actually point to a single _stop_ at the end.
@@ -1181,6 +1176,72 @@ These instructions only provide a starting point for testers to work on; testers
 .. Re-launch the app by double-clicking the jar file or running `java -jar csmodbuddy.jar` in command prompt/terminal. +
     Expected: The most recent window size and location is retained.
 
+=== Executing basic commands
+
+. Undo +
+.. Test case: `undo` +
+Expected:
+The previous command will be undone. However, note that `undo` does not work for commands that simply display information, such as `help`, or to commands that alter commits, such as `commit`.
+
+. Redo +
+.. Test case: `redo` +
+Expected:
+The command that was undone will be redone. 
+
+=== Executing module-related commands
+
+. Adding a module 
+.. Prerequisites
+... Module must be a valid Computer Science core module.
+... The current ModulePlanner must have an existing active study plan.
+... The active study plan must have the given semester.
+... The semester must not be blocked.
+... Study plan does not have any semester that contains the given module already.
+.. Test case: `addmod y2s1 cs2102` + 
+Expected: 
+If there exists an active study plan, the study plan has the given semester and the study plan does not contain any semester that has `CS2102`, then `CS2102` will be added to `Y2S1`. Else, an error message will show according to which criteria it failed.
+.. Test case: `addmod y2s1 cs2103 cs2104` + 
+Expected: 
+`CS2103` and `CS2104` will be added to `Y2S1`. Else, an error message will show according to which criteria it failed.
+
+. Removing a module 
+.. Prerequisites
+... Module must be a valid Computer Science core module.
+... The current ModulePlanner must have an existing active study plan.
+... The active study plan must have the given semester.
+... The semester must not be blocked.
+... Module exists in the given semester.
+.. Test case: `removemod cs2102 y2s1`  + 
+Expected: 
+If there exists an active study plan, the study plan has the given semester and the semester contains `CS2102`, then `CS2102` will be removed to `Y2S1`. Else, an error message will show according to which criteria it failed.
+
+=== Executing semester-related commands
+
+. Set current semester
+.. Prerequisites
+... The current ModulePlanner must have an existing active study plan.
+... The active study plan must have the given semester.
+.. Test case: `setcurrent y1s1` +
+Expected: `Y1S1` will be reflected as the current semester in the GUI. Modules in the previous semesters will have the `Completed` tag assigned to them, and the MC count of the study plan will be updated as well.
+
+. Blocking a semester
+.. Prerequisites
+... The current ModulePlanner must have an existing active study plan.
+... The active study plan must have the given semester.
+... Semester is not blocked. 
+.. Test case: `block y1s1 LOA` +
+Expected:
+If there exists an active study plan, the study plan has the given semester, then the semester will be blocked and it will reflect in the GUI as a darker shade of grey. The reason will also be shown. 
+
+. Unblocking a semester
+.. Prerequisites
+... The current ModulePlanner must have an existing active study plan.
+... The active study plan must have the given semester.
+... Semester is blocked.
+.. Test case: `unblock y1s1 LOA` +
+Expected:
+If there exists an active study plan, the study plan has the given blocked semester, then the semester will be unblocked and it will reflect in the GUI. 
+
 === Executing tagging-related commands
 
 . Tagging a module
@@ -1272,6 +1333,49 @@ priority tag, an error message will be shown.
 .. Test case: `listbypriority` +
 Expected:
 A left panel with a list of study plans sorted in the order such that their priorities are `high`, `low` and no priority.
+
+=== Executing study plan-level commands
+
+. Adding a study plan
+.. Test case: `newplan first` +
+Expected:
+A study plan with the title `first` is created, and a unique ID is assigned to it.
+.. Test case: `newplan` +
+Expected:
+A study plan without a title is created, and a unique ID is assigned to it.
+
+. Deleting a study plan
+.. Prerequisite
+... The study plan ID must refer to an existing study plan. You can check this by the `list` command.
+.. Test case: `removeplan 1` +
+Expected:
+The study plan with the ID `1` will be deleted. To check your study plans' indices, you can use the `list` command.
+
+. Listing all study plans
+.. Prerequisite
+... There is at least one study plan.
+.. Test case: `list` +
+Expected: all study plans are listed.
+
+. Viewing another study plan
+.. Prerequisite
+... The study plan ID must refer to an existing study plan. You can check this by the `list` command.
+.. Test case: `viewplan 1` +
+Expected:
+The study plan with the ID `1` will be displayed in the left panel as a simplified view.
+
+. Activating another study plan
+.. Prerequisite
+... The study plan ID must refer to an existing study plan. You can check this by the `list` command.
+.. Test case: `newplan title` then `activate 2` if the new plan's ID is `2` +
+Expected:
+The study plan with the ID `2` will be displayed in the left panel as a simplified view.
+
+. Editing the title
+.. Prerequisite
+... There is at least one study plan. (There is a current active plan)
+
+
 
 === Executing information and verification-related commands
 
