@@ -396,6 +396,9 @@
     -fx-opacity: 0.9;
 }
 
+#noActiveDisplay {
+    -fx-background-color: transparent !important;
+}
 
 .scroll-pane > .viewport {
     -fx-background-color: transparent;
